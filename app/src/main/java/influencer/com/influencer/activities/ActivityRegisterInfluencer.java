@@ -1,0 +1,51 @@
+package influencer.com.influencer.activities;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
+
+import influencer.com.influencer.R;
+
+public class ActivityRegisterInfluencer extends AppCompatActivity implements View.OnClickListener {
+
+    TextView login_move;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        hidingTheStatusBar( );
+        setContentView(R.layout.activity_register_influencer);
+        findid( );
+        login_move.setOnClickListener(this);
+    }
+
+
+    private void hidingTheStatusBar() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow( ).setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+    }
+
+
+    private void findid() {
+        login_move = findViewById(R.id.login_move);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId( )) {
+            case R.id.login_move:
+                Intent intent = new Intent(ActivityRegisterInfluencer.this, ActivityLoginInfluencer.class);
+                startActivity(intent);
+                break;
+        }
+
+    }
+}
