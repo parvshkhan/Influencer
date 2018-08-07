@@ -12,25 +12,33 @@
         <activity
             android:name=".activities.ActivitySplash"
             android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+
+        </activity>
         <activity
             android:name=".activities.InfluencerMainActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+        </activity>
+
+
         <activity
             android:name=".activities.ActivityLoginInfluencer"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.ActivityRegisterInfluencer"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.ActivityImagelist"></activity>
     </application>
 
 </manifest>

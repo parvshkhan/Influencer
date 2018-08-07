@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/recimage"
@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_cursor" />
+        android:src="@drawable/flower" />
 
     <TextView
         android:id="@+id/imgtitle"
@@ -46,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintStart_toEndOf="@+id/imgtitle"
         app:layout_constraintTop_toTopOf="@+id/imgtitle"
-        app:srcCompat="@drawable/color_cursor" />
+        android:src="@drawable/facebook" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -57,21 +57,33 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView6"
-        app:srcCompat="@drawable/color_cursor" />
+        android:src="@drawable/instagram"/>
 
     <TextView
         android:id="@+id/imgcomment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="The Sun_Herald City surf presented by westpac 24-36 yrs "
+        android:text="The Sun_Herald City surf presented by westpac"
         android:textSize="@dimen/_11sdp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgtitle" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="24-36 yrs "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgcomment" />
+
 
 </android.support.constraint.ConstraintLayout>

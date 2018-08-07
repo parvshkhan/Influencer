@@ -96,7 +96,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/loginbtnright"
-            android:drawableRight="@drawable/ic_action_name"
+            android:drawableRight="@drawable/ic_righterrow"
             android:text="Log in"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/login_password"

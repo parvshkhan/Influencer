@@ -1,5 +1,7 @@
 package influencer.com.influencer.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +42,11 @@ ProgressDialog progressDialog;
 
         hidingTheStatusBar();
 
+
         setContentView(R.layout.activity_infuencer);
+
+        validator = new Validator(this);
+
         findid();
 
         move_register.setOnClickListener(this);
@@ -73,6 +79,7 @@ ProgressDialog progressDialog;
                 Intent intent=new Intent(ActivityLoginInfluencer.this,ActivityRegisterInfluencer.class);
                 startActivity(intent);
                 finish();
+                break;
             case R.id.loginbtn:
                 loginbtnclick();
                 break;
@@ -84,7 +91,8 @@ ProgressDialog progressDialog;
 
     private void loginbtnclick() {
 
-        validator.validate();
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
 
 
 
@@ -93,9 +101,7 @@ ProgressDialog progressDialog;
     @Override
     public void onValidationSucceeded() {
 
-        progressDialog=new ProgressDialog(ActivityLoginInfluencer.this);
-        progressDialog.setMessage("Please Wait...");
-        progressDialog.show();
+
 
 
     }

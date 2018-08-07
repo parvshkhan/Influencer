@@ -1,6 +1,4 @@
-package influencer.com.influencer.activities.pojoclass;
-
-import java.util.ArrayList;
+package influencer.com.influencer.activities.pojoClasses;
 
 public class Recpojo {
 

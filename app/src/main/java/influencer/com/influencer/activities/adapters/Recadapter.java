@@ -1,4 +1,4 @@
-package influencer.com.influencer.activities.recAdapter;
+package influencer.com.influencer.activities.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,16 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import influencer.com.influencer.R;
-import influencer.com.influencer.activities.pojoclass.Recpojo;
+import influencer.com.influencer.activities.pojoClasses.Recpojo;
 
 public class Recadapter extends RecyclerView.Adapter<Recadapter.ListViewHolder> {
 private List<Recpojo> imgList; ;
-
 
 
     public Recadapter(List<Recpojo> imgList) {
@@ -38,6 +37,7 @@ private List<Recpojo> imgList; ;
         Recpojo recpojo = imgList.get(position);
         holder.imgtitle.setText(recpojo.getImgtitle());
         holder.imgcomment.setText(recpojo.getImgcomment());
+        holder.recimage.setImageResource(R.drawable.flower);
     }
 
     @Override
@@ -47,7 +47,7 @@ private List<Recpojo> imgList; ;
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
         
-        EditText imgcomment,imgtitle;
+        TextView imgcomment,imgtitle;
         ImageView recimage;
 
         public ListViewHolder(View itemView) {
