@@ -1,8 +1,8 @@
-package influencer.com.influencer.activities;
+package influencer.com.influencer.activities.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,22 +19,35 @@ import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import influencer.com.influencer.R;
 
-public class ActivityRegisterInfluencer extends AppCompatActivity implements View.OnClickListener, Validator.ValidationListener {
+public class ActivityRegister extends AppCompatActivity implements  Validator.ValidationListener {
 
-    TextView login_move;
-    Button registerbtn;
+    @BindView(R.id.login_move)
+    TextView tvLogin;
+
+    @BindView(R.id.loginbtn)
+    Button btRegister;
+
 
     Validator validator;
 
+    @BindView(R.id.login_email)
     @NotEmpty
-    EditText register_etusername;
-    @Email(message = "Please enter the valid email")
-    private EditText register_etemail;
+    EditText edUserName;
 
+    @BindView(R.id.login_password)
+    @NotEmpty
+    @Email(message = "Please enter the valid email")
+    EditText edEmail;
+
+    @BindView(R.id.register_password)
+    @NotEmpty
     @Password(min = 6, scheme = Password.Scheme.ANY)
-    private EditText register_etpassword;
+    EditText edPassword;
 
 
 
@@ -43,16 +56,12 @@ public class ActivityRegisterInfluencer extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         hidingTheStatusBar();
         setContentView(R.layout.activity_register_influencer);
-
+        ButterKnife.bind(this);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
 
 
-        findid();
-
-        login_move.setOnClickListener(this);
-        registerbtn.setOnClickListener(this);
     }
 
 
@@ -64,44 +73,16 @@ public class ActivityRegisterInfluencer extends AppCompatActivity implements Vie
     }
 
 
-    private void findid() {
-        login_move = findViewById(R.id.login_move);
-        register_etusername=findViewById(R.id.login_email);
-        register_etemail=findViewById(R.id.login_password);
-        register_etpassword=findViewById(R.id.register_password);
-        registerbtn=findViewById(R.id.loginbtn);
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-            case R.id.login_move:
-                Intent intent = new Intent(ActivityRegisterInfluencer.this, ActivityLoginInfluencer.class);
-                startActivity(intent);
-                break;
-            case R.id.loginbtn:
-                registerbtnclick();
-                break;
-        }
-
-    }
-
-    private void registerbtnclick() {
-//        String username,email,password;
-//        username=register_etusername.getText().toString();
 
 
 
-        validator.validate();
-    }
+
 
     @Override
     public void onValidationSucceeded() {
-
         Toast.makeText(this, "Yay! we got it right!", Toast.LENGTH_SHORT).show();
-
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -124,5 +105,19 @@ public class ActivityRegisterInfluencer extends AppCompatActivity implements Vie
         }
 
 
+    }
+
+
+    @OnClick(R.id.login_move)
+    public void openLoginActivity()
+    {
+        finish();
+    }
+
+    @OnClick(R.id.loginbtn)
+    public void openMainAcitivity()
+    {
+
+   validator.validate();
     }
 }

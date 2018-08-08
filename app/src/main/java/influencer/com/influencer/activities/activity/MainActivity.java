@@ -1,31 +1,25 @@
-package influencer.com.influencer.activities;
+package influencer.com.influencer.activities.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.ButterKnife;
 import influencer.com.influencer.R;
-import influencer.com.influencer.activities.adapters.Recadapter;
 import influencer.com.influencer.activities.adapters.ViewPagerAdapter;
 import influencer.com.influencer.activities.fragments.FragmentFive;
 import influencer.com.influencer.activities.fragments.FragmentFour;
 import influencer.com.influencer.activities.fragments.FragmentOne;
 import influencer.com.influencer.activities.fragments.FragmentThree;
 import influencer.com.influencer.activities.fragments.FragmentTwo;
-import influencer.com.influencer.activities.pojoClasses.Recpojo;
+import influencer.com.influencer.activities.helper.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,11 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
 
-    FragmentOne fragmentOne ;
-    FragmentTwo fragmentTwo;
-    FragmentThree fragmentThree;
-    FragmentFour fragmentFour;
-    FragmentFive fragmentFive;
+
 
     MenuItem prevMenuItem;
 
@@ -56,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         findid();
-
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
 
     }
@@ -136,17 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        fragmentOne=new FragmentOne();
-        fragmentTwo=new FragmentTwo();
-        fragmentThree=new FragmentThree();
-        fragmentFour=new FragmentFour();
-        fragmentFive=new FragmentFive();
 
-        adapter.addFragment(fragmentOne);
-        adapter.addFragment(fragmentTwo);
-        adapter.addFragment(fragmentThree);
-        adapter.addFragment(fragmentFour);
-        adapter.addFragment(fragmentFive);
+        adapter.addFragment(new FragmentOne());
+        adapter.addFragment(new FragmentTwo());
+        adapter.addFragment(new FragmentThree());
+        adapter.addFragment(new FragmentFour());
+        adapter.addFragment(new FragmentFive());
         viewPager.setAdapter(adapter);
     }
 

@@ -1,4 +1,4 @@
-package influencer.com.influencer.activities;
+package influencer.com.influencer.activities.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ public class ActivitySplash extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(3000);
-                    Intent intent=new Intent(ActivitySplash.this,InfluencerMainActivity.class);
+                    Intent intent=new Intent(ActivitySplash.this,SelectionActivity.class);
                     startActivity(intent);
                     finish();
 

@@ -1,4 +1,4 @@
-package influencer.com.influencer.activities.pojoClasses;
+package influencer.com.influencer.activities.model;
 
 public class Recpojo {
 

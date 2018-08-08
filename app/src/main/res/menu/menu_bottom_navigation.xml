@@ -6,29 +6,29 @@
         android:id="@+id/tab_one"
         android:checked="true"
         android:icon="@drawable/menuone"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:title=""
         android:id="@+id/tab_two"
         android:checked="false"
         android:icon="@drawable/menutwo"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:title=""
         android:id="@+id/tab_three"
         android:checked="false"
         android:icon="@drawable/menuthree"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 
     <item
-    android:title=""
-    android:id="@+id/tab_four"
-    android:checked="false"
-    android:icon="@drawable/menufour"
+        android:title=""
+        android:id="@+id/tab_four"
+        android:checked="false"
+        android:icon="@drawable/menufour"
 
-    app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:title=""
@@ -36,7 +36,7 @@
         android:checked="false"
         android:icon="@drawable/menu"
 
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 
 

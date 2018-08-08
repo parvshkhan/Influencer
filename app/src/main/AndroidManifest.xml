@@ -10,34 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.ActivitySplash"
+            android:name=".activities.activity.ActivitySplash"
             android:windowSoftInputMode="stateHidden">
+
+
+
+        </activity>
+        <activity
+            android:name=".activities.activity.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".activities.MainActivity"
-            android:windowSoftInputMode="stateHidden" >
-
-
-        </activity>
-        <activity
-            android:name=".activities.InfluencerMainActivity"
+            android:name=".activities.activity.SelectionActivity"
             android:windowSoftInputMode="stateHidden" >
 
         </activity>
 
 
         <activity
-            android:name=".activities.ActivityLoginInfluencer"
+            android:name=".activities.activity.ActivityLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.ActivityRegisterInfluencer"
+            android:name=".activities.activity.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
     </application>
 

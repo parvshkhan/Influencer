@@ -9,6 +9,7 @@
     <color name="colorlogindarkpink">#FFFF537D</color>
     <color name="white">#ffffff</color>
     <color name="blue">#174b80</color>
+    <color name="black">#000000</color>
 
 
 
@@ -22,6 +23,7 @@
 
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="semitransparent">#c4c4c4</color>
 
     <color name="tab_disable">#979797</color>
     <color name="tab_enable">#FFFFFF</color>

@@ -5,14 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import influencer.com.influencer.R;
-import influencer.com.influencer.activities.pojoClasses.Recpojo;
+import influencer.com.influencer.activities.model.Recpojo;
 
 public class Recadapter extends RecyclerView.Adapter<Recadapter.ListViewHolder> {
 private List<Recpojo> imgList; ;
@@ -27,7 +26,7 @@ private List<Recpojo> imgList; ;
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycleview_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_mainlist, parent, false);
 
         return new ListViewHolder(view);
     }

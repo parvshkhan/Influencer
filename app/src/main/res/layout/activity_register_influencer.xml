@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="#eff7fb"
         android:paddingBottom="@dimen/_15sdp"
-        tools:context="influencer.com.influencer.activities.ActivityLoginInfluencer">
+        tools:context="influencer.com.influencer.activities.activity.ActivityLogin">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -53,11 +54,10 @@
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
             android:hint="USER NAME"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
-            android:textColor="#303f9f"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/login_password"
@@ -77,11 +77,10 @@
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
             android:hint="EMAIL ADDRESS"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
-            android:textColor="#303F9F"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/login_email"
@@ -100,11 +99,10 @@
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
             android:hint="PASSWORD"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
-            android:textColor="#303F9F"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/login_email"
@@ -134,7 +132,7 @@
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:background="#063ed7"
+            android:background="@color/tab_disable"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -146,7 +144,7 @@
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:background="#063ed7"
+            android:background="@color/tab_disable"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/login_withinsta"
             android:drawableLeft="@drawable/influencer_insta"
             android:paddingLeft="@dimen/_15sdp"
@@ -202,27 +200,31 @@
             app:layout_constraintTop_toBottomOf="@+id/regfbbtn" />
 
         <TextView
-
             android:id="@+id/textView5"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="You already have an account?"
+            android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/reg_insta_btn"
             app:layout_constraintTop_toBottomOf="@+id/reg_insta_btn" />
 
         <TextView
             android:id="@+id/login_move"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Login Here"
             android:textColor="#ff0022"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5" />
     </android.support.constraint.ConstraintLayout>
