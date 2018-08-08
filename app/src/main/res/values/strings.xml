@@ -4,5 +4,8 @@
     <string name="splash_name">influencer screen</string>
     <string name="influencer">influencer</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

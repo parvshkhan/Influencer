@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -11,9 +11,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/_15sdp"
         android:layout_height="match_parent"
         android:background="#eff7fb"
+        android:paddingBottom="@dimen/_15sdp"
         tools:context="influencer.com.influencer.activities.ActivityLoginInfluencer">
 
         <ImageView
@@ -42,31 +42,31 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <EditText
-            android:id="@+id/register_username"
+            android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:textColor="#303f9f"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/loginedittextbg"
             android:drawableLeft="@drawable/ic_user"
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
-            android:textCursorDrawable="@drawable/color_cursor"
             android:hint="USER NAME"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
+            android:textColor="#303f9f"
+            android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@+id/register_email"
+            app:layout_constraintBottom_toTopOf="@+id/login_password"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
             app:layout_constraintStart_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
-            android:id="@+id/register_email"
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -76,17 +76,17 @@
             android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
-            android:textColor="#303F9F"
-            android:textCursorDrawable="@drawable/color_cursor"
             android:hint="EMAIL ADDRESS"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
+            android:textColor="#303F9F"
+            android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="@+id/register_username"
-            app:layout_constraintStart_toStartOf="@+id/register_username"
-            app:layout_constraintTop_toBottomOf="@+id/register_username" />
+            app:layout_constraintEnd_toEndOf="@+id/login_email"
+            app:layout_constraintStart_toStartOf="@+id/login_email"
+            app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
         <EditText
             android:id="@+id/register_password"
@@ -99,33 +99,33 @@
             android:drawableLeft="@drawable/ic_password"
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
-            android:textColor="#303F9F"
-            android:textCursorDrawable="@drawable/color_cursor"
             android:hint="PASSWORD"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:padding="8dp"
             android:singleLine="true"
+            android:textColor="#303F9F"
+            android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="@+id/register_username"
+            app:layout_constraintEnd_toEndOf="@+id/login_email"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/register_email" />
+            app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
         <Button
-            android:id="@+id/registerbtn"
+            android:id="@+id/loginbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/login_influencerbtnbg"
-            android:drawableRight="@drawable/ic_action_name"
+            android:background="@drawable/loginbtnright"
+            android:drawableRight="@drawable/ic_righterrow"
             android:text="Register"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/register_email"
+            app:layout_constraintEnd_toEndOf="@+id/login_password"
             app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="@+id/register_email"
+            app:layout_constraintStart_toStartOf="@+id/login_password"
             app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
         <View
@@ -163,7 +163,7 @@
             android:textSize="@dimen/_15ssp"
             app:layout_constraintEnd_toStartOf="@+id/view2"
             app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/registerbtn" />
+            app:layout_constraintTop_toBottomOf="@+id/loginbtn" />
 
         <Button
             android:id="@+id/regfbbtn"
@@ -178,9 +178,9 @@
             android:text="Login with Facebook"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/registerbtn"
+            app:layout_constraintEnd_toEndOf="@+id/loginbtn"
             app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="@+id/registerbtn"
+            app:layout_constraintStart_toStartOf="@+id/loginbtn"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Button

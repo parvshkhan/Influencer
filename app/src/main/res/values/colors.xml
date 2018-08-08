@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#043c75</color>
+    <color name="colorPrimaryDark">#043c75</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorpink">#FF1493</color>
     <color name="colorblue">#303F9F</color>
     <color name="colorloginlightpink">#FFFF6F94</color>
     <color name="colorlogindarkpink">#FFFF537D</color>
     <color name="white">#ffffff</color>
+    <color name="blue">#174b80</color>
+
+
+
+
+
+
+
+
+
+
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorTextPrimary">#FFFFFF</color>
+
+    <color name="tab_disable">#979797</color>
+    <color name="tab_enable">#FFFFFF</color>
+    <color name="tab_checked">#F3CD70</color>
+    <color name="tab_unchecked">#FFFFFF</color>
+
+
+
+
+
 </resources>
