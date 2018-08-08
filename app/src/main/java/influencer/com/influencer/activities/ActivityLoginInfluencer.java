@@ -1,7 +1,5 @@
 package influencer.com.influencer.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +41,7 @@ ProgressDialog progressDialog;
         hidingTheStatusBar();
 
 
-        setContentView(R.layout.activity_infuencer);
+        setContentView(R.layout.activity_login_infuencer);
 
         validator = new Validator(this);
 
@@ -91,7 +89,7 @@ ProgressDialog progressDialog;
 
     private void loginbtnclick() {
 
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent=new Intent(getApplicationContext(),ActivityProfileMain.class);
         startActivity(intent);
 
 

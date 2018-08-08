@@ -5,37 +5,30 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.ButterKnife;
 import influencer.com.influencer.R;
-import influencer.com.influencer.activities.adapters.Recadapter;
 import influencer.com.influencer.activities.adapters.ViewPagerAdapter;
 import influencer.com.influencer.activities.fragments.FragmentFive;
 import influencer.com.influencer.activities.fragments.FragmentFour;
 import influencer.com.influencer.activities.fragments.FragmentOne;
 import influencer.com.influencer.activities.fragments.FragmentThree;
 import influencer.com.influencer.activities.fragments.FragmentTwo;
-import influencer.com.influencer.activities.pojoClasses.Recpojo;
 
-public class MainActivity extends AppCompatActivity {
-
+public class ActivityProfileMain extends AppCompatActivity {
 
 
-    RecyclerView rcImage;
+
 
     private SearchView searchView;
 
     Button influencerbtn;
+
 
     BottomNavigationView bottomNavigationView;
 
@@ -53,15 +46,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile_main);
         ButterKnife.bind(this);
         findid();
 
-
-
     }
-
-
 
 
 
@@ -71,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         influencerbtn = findViewById(R.id.influencerbtn);
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -158,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
 //
-//                System.out.println("MainActivity.onQueryTextSubmit " + query);
+//                System.out.println("ActivityProfileMain.onQueryTextSubmit " + query);
 //
 //                return false;
 //            }
@@ -166,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public boolean onQueryTextChange(String newText) {
 //
-//                System.out.println("MainActivity.onQueryTextSubmit " + newText);
+//                System.out.println("ActivityProfileMain.onQueryTextSubmit " + newText);
 //                return false;
 //            }
 //        });

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "influencer.com.influencer"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -43,4 +43,5 @@ dependencies {
     compile 'com.github.javiersantos:BottomDialogs:1.2.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
