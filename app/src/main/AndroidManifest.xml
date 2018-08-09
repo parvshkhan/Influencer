@@ -12,13 +12,6 @@
         <activity
             android:name=".activities.activity.ActivitySplash"
             android:windowSoftInputMode="stateHidden">
-
-
-
-        </activity>
-        <activity
-            android:name=".activities.activity.MainActivity"
-            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,18 +20,26 @@
 
         </activity>
         <activity
-            android:name=".activities.activity.SelectionActivity"
-            android:windowSoftInputMode="stateHidden" >
+            android:name=".activities.activity.MainActivity"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
+        <activity
+            android:name=".activities.activity.SelectionActivity"
+            android:windowSoftInputMode="stateHidden">
 
 
+        </activity>
         <activity
             android:name=".activities.activity.ActivityLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.activity.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activities.activity.ActivitySelectIntrest">
+
+
+        </activity>
     </application>
 
 </manifest>
