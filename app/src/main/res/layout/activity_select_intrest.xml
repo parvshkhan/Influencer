@@ -6,16 +6,95 @@
     android:layout_height="match_parent"
     tools:context="influencer.com.influencer.activities.activity.ActivitySelectIntrest">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </android.support.v7.widget.Toolbar>
+
 
     <com.igalata.bubblepicker.rendering.BubblePicker
         android:id="@+id/picker"
+        android.supporconstraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:backgroundColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/interestnext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Select Interests"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toStartOf="@+id/interestskip"
+        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/interestskip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15ssp"
+        android:text="Skip"
+        android:textSize="@dimen/_15ssp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textView26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+    <Button
+        android:id="@+id/interestnext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="NEXT"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="@dimen/_17ssp"
+        android:text="Tell Us About Your Interests"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="@dimen/_13ssp"
+        android:text="Tab once on your favourite genres"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
 
 </android.support.constraint.ConstraintLayout>

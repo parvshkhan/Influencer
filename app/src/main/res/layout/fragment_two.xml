@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/_10sdp"
-    android:background="#e1f0f5">
+    android:background="#eff7fb"
+    android:paddingBottom="@dimen/_10sdp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,13 +22,14 @@
         android:id="@+id/constraintLayout4"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_layout"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
+        android:padding="@dimen/_15ssp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout5"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -38,18 +39,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/approved_icon" />
+            app:srcCompat="@drawable/icon_declined" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
 
-            android:text="Approved"
+            android:text="Declined"
             android:textColor="@color/blue"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
@@ -63,14 +62,15 @@
         android:id="@+id/constraintLayout5"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_layout"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/_15ssp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout7"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_warning" />
+            app:srcCompat="@drawable/approved_icon" />
 
         <TextView
             android:id="@+id/textView9"
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:text="Pending"
+            android:text="Approved"
             android:textColor="@color/blue"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
@@ -105,13 +105,14 @@
         android:id="@+id/constraintLayout6"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_layout"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout7"
+        android:padding="@dimen/_15ssp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout7"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout7"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
         <ImageView
 
@@ -124,18 +125,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_declined" />
+            app:srcCompat="@drawable/withdrawal" />
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
 
-            android:text="Declined"
+            android:text="Withdraw"
             android:textColor="@color/blue"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
@@ -149,13 +148,15 @@
         android:id="@+id/constraintLayout7"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/round_layout"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
+        android:padding="@dimen/_15ssp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
         <ImageView
             android:id="@+id/imageView9"
@@ -165,7 +166,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/withdrawal" />
+            app:srcCompat="@drawable/icon_warning" />
 
         <TextView
             android:id="@+id/textView22"
@@ -175,7 +176,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Withdraw"
+            android:text="Pending"
             android:textColor="@color/blue"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold"
@@ -189,14 +190,14 @@
         android:id="@+id/constraintLayout8"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginStart="8dp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_layout"
+        android:padding="@dimen/_15ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout9"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <ImageView
             android:id="@+id/imageView10"
@@ -219,6 +220,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
     </android.support.constraint.ConstraintLayout>
@@ -227,15 +229,16 @@
         android:id="@+id/constraintLayout9"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:padding="@dimen/_15ssp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/round_layout"
+        android:padding="@dimen/_15ssp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
         <ImageView
             android:id="@+id/imageView11"
@@ -269,18 +272,11 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="Influencer Campaingns"
         android:textColor="#ffffff"
         android:textSize="@dimen/_15ssp"
 
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
-        app:layout_constraintStart_toStartOf="@+id/toolbar2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
+        />
 
 
 </android.support.constraint.ConstraintLayout>

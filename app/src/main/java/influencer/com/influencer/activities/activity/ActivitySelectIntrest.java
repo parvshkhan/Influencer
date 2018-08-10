@@ -1,65 +1,131 @@
 package influencer.com.influencer.activities.activity;
-
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.igalata.bubblepicker.BubblePickerListener;
 import com.igalata.bubblepicker.model.PickerItem;
 import com.igalata.bubblepicker.rendering.BubblePicker;
-
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import influencer.com.influencer.R;
 
 public class ActivitySelectIntrest extends AppCompatActivity {
-    PickerItem pickerItem;
+    BubblePicker bubblePicker;
+    @BindView (R.id.interestnext)
+    Button interestnextbtn;
+    @BindView(R.id.interestskip)
+    TextView interestskip;
 
-    BubblePicker picker;
-    String[] titles={"charan","shazeb","parvesh","prabh","ankit"};
 
-    int[] image={R.drawable.flower,R.drawable.flower,R.drawable.flower,R.drawable.flower,R.drawable.flower};
+    String[] name={
+            "Food",
+            "Food",
+            "Beauty",
+            "Beauty",
+            "Lifestyle",
+            "Lifestyle",
+            "Baby",
+            "Baby",
+            "Intertainment",
+            "Intertainment",
+            "Interior",
+            "Health",
+            "Adventure",
+            "Sports",
+            "Travel"
+    };
 
-//    int[] color={Color.parseColor("#0000" ),Color.parseColor("#0000"),Color.parseColor("#0000"),Color.parseColor("#0000"),Color.parseColor("#0000"),};
+
+    int[] colors = {
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75"),
+            android.graphics.Color.parseColor("#043c75")
+    };
+
+    int[] images = {
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower,
+            R.drawable.flower
+
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_intrest);
+ButterKnife.bind(this);
 
-        picker=findViewById(R.id.picker);
-        ArrayList<PickerItem> items=new ArrayList<>();
 
-        for(int i=0;i<titles.length;i++)
-        {
-            pickerItem = new PickerItem (titles[i],getResources ().getDrawable (image[i]), true,getColor ( R.color.blue ));
-            items.add(pickerItem);
+        bubblePicker = (BubblePicker) findViewById(R.id.picker);
+        ArrayList<PickerItem> listitems =  new ArrayList<>();
+        for (int i=0;i<name.length;i++){
+//            PickerItem item = new PickerItem(name[i],null, true , R.drawable.flower);
+            PickerItem item = new PickerItem(name[i],colors[i], android.graphics.Color.WHITE, getDrawable(images[i]));
 
+            listitems.add(item);
+//            Drawable drawable = this.getResources().getDrawable(R.drawable.yourDrawableID);
         }
-        picker.setItems ( items );
-        picker.setListener ( new BubblePickerListener ( ) {
+        bubblePicker.setBubbleSize(15);
+        bubblePicker.setItems(listitems);
+        bubblePicker.setListener(new BubblePickerListener() {
             @Override
-            public void onBubbleSelected(PickerItem pickerItem) {
-
+            public void onBubbleSelected(@NotNull PickerItem pickerItem) {
+//                Toast.makeText(ActivitySelectIntrest.this,pickerItem.getTitle()+" Added To Your Interest", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onBubbleDeselected(PickerItem pickerItem) {
-
+            public void onBubbleDeselected(@NotNull PickerItem pickerItem) {
+//                Toast.makeText(ActivitySelectIntrest.this,pickerItem.getTitle()+"Removed from Your Interest", Toast.LENGTH_SHORT).show();
             }
-        } );
-
+        });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        picker.onResume();
+    @OnClick(R.id.interestnext)
+    public void openmainActivity()
+    {
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    @OnClick(R.id.interestskip)
+    public void openactivitymain()
+    {
+        openmainActivity();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        picker.onPause();
-    }
+
 }

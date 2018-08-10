@@ -76,7 +76,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(edPassword.getWindowToken(), 0);
 
-        Intent intent=new Intent(ActivityLogin.this,MainActivity.class);
+        Intent intent=new Intent(ActivityLogin.this,ActivitySelectIntrest.class);
         startActivity(intent);
         finish();
 
