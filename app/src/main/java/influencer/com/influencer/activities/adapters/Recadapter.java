@@ -1,5 +1,7 @@
 package influencer.com.influencer.activities.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,11 +13,12 @@ import android.widget.TextView;
 import java.util.List;
 
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.activity.ActivityPost;
 import influencer.com.influencer.activities.model.Recpojo;
 
 public class Recadapter extends RecyclerView.Adapter<Recadapter.ListViewHolder> {
 private List<Recpojo> imgList; ;
-
+Context context;
 
     public Recadapter(List<Recpojo> imgList) {
         this.imgList = imgList;
@@ -27,6 +30,8 @@ private List<Recpojo> imgList; ;
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_mainlist, parent, false);
+context=parent.getContext();
+
 
         return new ListViewHolder(view);
     }
@@ -37,6 +42,14 @@ private List<Recpojo> imgList; ;
         holder.imgtitle.setText(recpojo.getImgtitle());
         holder.imgcomment.setText(recpojo.getImgcomment());
         holder.recimage.setImageResource(R.drawable.flower);
+
+        holder.recimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, ActivityPost.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

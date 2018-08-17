@@ -272,11 +272,18 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:text="Influencer Campaingns"
         android:textColor="#ffffff"
         android:textSize="@dimen/_15ssp"
-
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
 
 
 </android.support.constraint.ConstraintLayout>

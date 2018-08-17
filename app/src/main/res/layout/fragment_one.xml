@@ -22,6 +22,9 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="42dp"
+
+        android:queryHint="Search..."
+        android:drawableLeft="@drawable/search_icon"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
@@ -30,7 +33,6 @@
         android:layout_marginTop="8dp"
         android:searchIcon="@drawable/search_icon"
         android:background="@drawable/round_edittext"
-        android:queryHint="Influencer"
         app:layout_constraintBottom_toTopOf="@+id/viewpager"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintHorizontal_bias="0.0"
@@ -47,5 +49,5 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/row_mainlist" />
+        />
 </android.support.constraint.ConstraintLayout>

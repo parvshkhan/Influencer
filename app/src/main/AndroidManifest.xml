@@ -17,31 +17,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activities.activity.MainActivity"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".activities.activity.SelectionActivity"
-            android:windowSoftInputMode="stateHidden">
-
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".activities.activity.ActivityLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.activity.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.activity.ActivitySelectIntrest">
-
-
-
-
-        </activity>
+        <activity android:name=".activities.activity.ActivitySelectIntrest"></activity>
+        <activity android:name=".activities.activity.ActivityPost"></activity>
     </application>
 
 </manifest>
