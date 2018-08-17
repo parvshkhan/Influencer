@@ -1,5 +1,6 @@
 package influencer.com.influencer.activities.activity;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -9,16 +10,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import butterknife.ButterKnife;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.adapters.ViewPagerAdapter;
 import influencer.com.influencer.activities.fragments.FragmentFive;
-import influencer.com.influencer.activities.fragments.FragmentFour;
-import influencer.com.influencer.activities.fragments.FragmentOne;
+import influencer.com.influencer.activities.fragments.FragmentProfile;
+import influencer.com.influencer.activities.fragments.FragmentListing;
 import influencer.com.influencer.activities.fragments.FragmentThree;
-import influencer.com.influencer.activities.fragments.FragmentTwo;
+import influencer.com.influencer.activities.fragments.FragmentCampaigns;
 import influencer.com.influencer.activities.helper.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     MenuItem prevMenuItem;
+    View view;
+    InputMethodManager imm;
 
 
     @Override
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         findid();
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
+
+        imm = (InputMethodManager) getApplicationContext ().getSystemService(getApplicationContext ().INPUT_METHOD_SERVICE);
 
 
     }
@@ -127,34 +134,22 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new FragmentOne());
-        adapter.addFragment(new FragmentTwo());
+
+
+
+        adapter.addFragment(new FragmentListing ());
+        adapter.addFragment(new FragmentCampaigns ());
         adapter.addFragment(new FragmentThree());
-        adapter.addFragment(new FragmentFour());
+        adapter.addFragment(new FragmentProfile ());
         adapter.addFragment(new FragmentFive());
         viewPager.setAdapter(adapter);
+
+        if (!adapter.equals (new FragmentProfile ()  ))
+        {
+            imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
+
+        }
     }
 
-//    private void findid() {
-//        searchView = findViewById(R.id.searchView);
-//
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//                System.out.println("MainActivity.onQueryTextSubmit " + query);
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//
-//                System.out.println("MainActivity.onQueryTextSubmit " + newText);
-//                return false;
-//            }
-//        });
-//    }
 
 }

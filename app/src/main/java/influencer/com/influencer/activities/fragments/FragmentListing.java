@@ -25,7 +25,7 @@ import influencer.com.influencer.R;
 import influencer.com.influencer.activities.adapters.Recadapter;
 import influencer.com.influencer.activities.model.Recpojo;
 
-public class FragmentOne extends Fragment {
+public class FragmentListing extends Fragment {
 
     @BindView(R.id.searchView)
     SearchView search;

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import influencer.com.influencer.R;
 
 public class FragmentThree extends Fragment {
@@ -16,6 +17,8 @@ public class FragmentThree extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_three, container, false);
+        View view = inflater.inflate(R.layout.fragment_three, container, false);
+        ButterKnife.bind (this,view);
+        return view;
     }
 }

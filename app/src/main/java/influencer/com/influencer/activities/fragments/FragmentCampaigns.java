@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import influencer.com.influencer.R;
 
-public class FragmentFour extends Fragment {
+public class FragmentCampaigns extends Fragment {
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_four, container, false);
+        return inflater.inflate(R.layout.fragment_two, container, false);
     }
 }
