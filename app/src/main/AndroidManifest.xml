@@ -32,7 +32,6 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".activities.activity.ActivitySelectIntrest" />
         <activity android:name=".activities.activity.ActivityPost" />
-        <activity android:name=".activities.activity.ActivityForgetPassword"></activity>
     </application>
 
 </manifest>

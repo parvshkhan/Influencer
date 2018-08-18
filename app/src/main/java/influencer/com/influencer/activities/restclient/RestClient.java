@@ -8,7 +8,11 @@ import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.ProfileHomeAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.UserProfileAPI;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -77,7 +81,28 @@ public class RestClient {
         @POST("Register")
         Call <RegisterAPI> registerAPI(@Field("Email") String Email,
                                        @Field("Password") String Password, @Field("UserName") String UserName);
+        @FormUrlEncoded
+        @POST("Register")
+        Call <LoginAPI> loginAPI(@Field("Email") String Email,
+                                        @Field("Password") String Password);
 
+        @FormUrlEncoded
+        @POST("Register")
+        Call <ForgetPwdAPI> forgotpwdAPI(@Field("Email") String Email
+
+        );
+
+        @FormUrlEncoded
+        @POST("Register")
+        Call <ProfileHomeAPI> profilehomeAPI(@Field("image") String Email
+
+        );
+
+        @FormUrlEncoded
+        @POST("Register")
+        Call <UserProfileAPI> userprofileAPI(@Field("image") String Email
+
+        );
 
     }
 }

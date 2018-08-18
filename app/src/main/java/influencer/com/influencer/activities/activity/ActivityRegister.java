@@ -120,7 +120,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         else
         if(response instanceof Response)
         {
-            RegisterAPI registerAPI = (RegisterAPI) response;
+            Response <RegisterAPI> registerAPI = (Response<RegisterAPI>) response;
 
 
 

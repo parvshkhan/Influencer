@@ -144,11 +144,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new FragmentFive());
         viewPager.setAdapter(adapter);
 
-        if (!adapter.equals (new FragmentProfile ()  ))
-        {
-            imm.hideSoftInputFromWindow( view.getWindowToken(), 0);
-
-        }
     }
 
 

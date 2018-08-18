@@ -193,7 +193,7 @@
             android:background="@drawable/login_withinsta"
             android:drawableLeft="@drawable/influencer_insta"
             android:paddingLeft="@dimen/_15sdp"
-            android:text="Log in with Instagram"
+            android:text="Login with Instagram"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/regfbbtn"
