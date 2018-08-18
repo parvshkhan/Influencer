@@ -42,23 +42,6 @@ public class RestClient {
         logging.setLevel ( HttpLoggingInterceptor.Level.BODY );
 
 
-        // Shahzeb commented this code
-        //The logging interceptor will be added to the http client
-//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder ( );
-//        httpClient.addInterceptor ( logging );
-//
-//        Gson gson = new GsonBuilder ( )
-//                .setLenient ( )
-//                .create ( );
-        //The RetrofitUtil builder will have the client attached, in order to get connection logs
-
-// Shahzeb commented this code
-
-//        RetrofitUtil retrofit = new RetrofitUtil.Builder ( )
-//                .client ( httpClient.build ( ) )
-//                .addConverterFactory ( GsonConverterFactory.create ( gson ) )
-//                .baseUrl ( baseUrl )
-//                .build ( );
 
 
         GitApiInterface gitApiInterface = retrofit.create ( GitApiInterface.class );

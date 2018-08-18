@@ -2,7 +2,6 @@ package influencer.com.influencer.activities.retrofit;
 
 import android.content.Context;
 
-import influencer.com.influencer.activities.activity.ActivityLogin;
 import influencer.com.influencer.activities.activity.ActivityRegister;
 import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
 import influencer.com.influencer.activities.callback.IRegisterCallback;
@@ -32,20 +31,19 @@ public class RetrofitUtil {
     {
 
         restClient.registerAPI ( email, password, username ).enqueue ( new Callback<RegisterAPI> ( ) {
-            @Override
-            public void onResponse(Call<RegisterAPI> call, Response<RegisterAPI> response) {
-              iRegisterCallback.getRegisterResponse (response);
-            }
+                                                                           @Override
+                                                                           public void onResponse(Call<RegisterAPI> call, Response<RegisterAPI> response) {
+                                                                               iRegisterCallback.getRegisterResponse (response);
+                                                                           }
 
-            @Override
-            public void onFailure(Call <RegisterAPI> call, Throwable t) {
+                                                                           @Override
+                                                                           public void onFailure(Call <RegisterAPI> call, Throwable t) {
 
-                iRegisterCallback.getRegisterResponse (t);
+                                                                               iRegisterCallback.getRegisterResponse (t);
 
-            }
-        } );
-
-
+                                                                           }
+                                                                       }
+        );
     }
 
 
