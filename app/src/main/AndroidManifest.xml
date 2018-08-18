@@ -20,18 +20,19 @@
         </activity>
         <activity
             android:name=".activities.activity.MainActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.activity.SelectionActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.activity.ActivityLogin"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.activity.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.activity.ActivitySelectIntrest"></activity>
-        <activity android:name=".activities.activity.ActivityPost"></activity>
+        <activity android:name=".activities.activity.ActivitySelectIntrest" />
+        <activity android:name=".activities.activity.ActivityPost" />
+        <activity android:name=".activities.activity.ActivityForgetPassword"></activity>
     </application>
 
 </manifest>

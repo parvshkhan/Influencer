@@ -2,8 +2,12 @@ package influencer.com.influencer.activities.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -127,6 +131,19 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         Intent intent=new Intent(getApplicationContext(),ActivityRegister.class);
         startActivity(intent);
 
+    }
+
+    @OnClick(R.id.textView3)
+    public void openforgetpassword()
+    {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+// ...Irrelevant code for customizing the buttons and title
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialogBuilder.setView(inflater.inflate(R.layout.activity_forget_password, null));
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable ( Color.TRANSPARENT));
+
+        alertDialog.show();
     }
 
 }
