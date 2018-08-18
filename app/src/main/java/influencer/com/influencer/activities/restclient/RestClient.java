@@ -50,11 +50,11 @@ public class RestClient {
 //        Gson gson = new GsonBuilder ( )
 //                .setLenient ( )
 //                .create ( );
-        //The Retrofit builder will have the client attached, in order to get connection logs
+        //The RetrofitUtil builder will have the client attached, in order to get connection logs
 
 // Shahzeb commented this code
 
-//        Retrofit retrofit = new Retrofit.Builder ( )
+//        RetrofitUtil retrofit = new RetrofitUtil.Builder ( )
 //                .client ( httpClient.build ( ) )
 //                .addConverterFactory ( GsonConverterFactory.create ( gson ) )
 //                .baseUrl ( baseUrl )

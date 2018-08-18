@@ -1,7 +1,5 @@
 package influencer.com.influencer.activities.activity;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +16,6 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,13 +23,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
-import influencer.com.influencer.activities.restclient.RestClient;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
+import influencer.com.influencer.activities.callback.IRegisterCallback;
+import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 import retrofit2.Response;
 
-public class ActivityRegister extends AppCompatActivity implements Validator.ValidationListener {
+public class ActivityRegister extends AppCompatActivity implements Validator.ValidationListener,IRegisterCallback {
 
     @BindView(R.id.login_move)
     TextView tvLogin;
@@ -41,7 +36,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     Button btRegister;
 
 
-    Validator validator;
+  private Validator validator;
 
     @BindView(R.id.login_email)
     @NotEmpty
@@ -64,89 +59,26 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         hidingTheStatusBar ( );
         setContentView ( R.layout.activity_register_influencer );
         ButterKnife.bind ( this );
-
         validator = new Validator ( this );
         validator.setValidationListener ( this );
-
-
     }
 
 
     private void hidingTheStatusBar() {
         requestWindowFeature ( Window.FEATURE_NO_TITLE );
         this.getWindow ( ).setFlags ( WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
-
-
     }
 
 
     @Override
     public void onValidationSucceeded() {
-        final ProgressDialog progressDialog = new ProgressDialog ( ActivityRegister.this );
-        progressDialog.setMessage ( "Pleaser Wait..." );
-        progressDialog.show ( );
 
-        RestClient.GitApiInterface restClient = RestClient.getClient ( );
-//        HashMap <String, String> stringStringHashMap = new HashMap <> ( );
-//        stringStringHashMap.put ( "Email", edEmail.getText ( ).toString ( ) );
-//        stringStringHashMap.put ( "Password", edPassword.getText ( ).toString ( ) );
-//        stringStringHashMap.put ( "UserName", edUserName.getText ( ).toString ( ) );
-
-
-        String email = edEmail.getText ( ).toString ( ).trim ( );
-        String password = edPassword.getText ( ).toString ( ).trim ( );
-        String username = edUserName.getText ( ).toString ( ).trim ( );
-
-
-
-
-        restClient.registerAPI ( email, password, username ).enqueue ( new Callback <RegisterAPI> ( ) {
-            @Override
-            public void onResponse(Call <RegisterAPI> call, Response <RegisterAPI> response) {
-
-                if(response.body ( ).getSuccess ( )) {
-
-//                    Toast.makeText ( getApplicationContext (),""+response,Toast.LENGTH_SHORT ).show ();
-
-
-                    Toast.makeText ( getApplicationContext ( ), response.body ( ).getMessage ( ), Toast.LENGTH_LONG ).show ( );
-
-                    progressDialog.hide ( );
-
-
-                } else {
-
-
-                    Toast.makeText ( getApplicationContext ( ), response.body ( ).getMessage ( ), Toast.LENGTH_LONG ).show ( );
-                    progressDialog.hide ( );
-
-
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call <RegisterAPI> call, Throwable t) {
-
-
-                System.out.println ( "ActivityRegister.onFailure"  + t);
-                Toast.makeText ( getApplicationContext ( ), "" + t, Toast.LENGTH_LONG ).show ( );
-                progressDialog.hide ( );
-
-
-            }
-        } );
-
-
-     /*   Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(intent);*/
+        RetrofitUtil retrofitUtil = new RetrofitUtil (ActivityRegister.this);
+        retrofitUtil.RegisterResponse ( edUserName.getText ().toString (),edEmail.getText ().toString (),edPassword.getText ().toString ());
     }
 
     @Override
     public void onValidationFailed(List <ValidationError> errors) {
-
-
         for (ValidationError error : errors) {
             View view = error.getView ( );
             String message = error.getCollatedErrorMessage ( this );
@@ -174,5 +106,28 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     public void openMainAcitivity() {
 
         validator.validate ( );
+    }
+
+    @Override
+    public void getRegisterResponse(Object response) {
+
+
+        if(response instanceof Throwable)
+        {
+
+            Toast.makeText ( getApplicationContext (), "Api crashed", Toast.LENGTH_SHORT ).show ( );
+        }
+        else
+        if(response instanceof Response)
+        {
+            RegisterAPI registerAPI = (RegisterAPI) response;
+
+
+
+
+        }
+
+
+
     }
 }
