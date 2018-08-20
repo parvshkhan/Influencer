@@ -23,5 +23,8 @@
 
     </string>
 
+    <string name="facebook_app_id">443008666195754</string>
+    <string name="fb_login_protocol_scheme">fb443008666195754</string>
+
 
 </resources>
