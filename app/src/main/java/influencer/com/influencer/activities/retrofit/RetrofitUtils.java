@@ -22,13 +22,13 @@ public class RetrofitUtil {
     private RestClient.GitApiInterface restClient = RestClient.getClient ( );
     private IRegisterCallback iRegisterCallback;
 
-
-
-
     public RetrofitUtil(Context  ctx) {
         if(ctx instanceof ActivityRegister)
+
             iRegisterCallback = (IRegisterCallback) ctx;
+
         if(ctx instanceof ActivityLogin)
+
             iRegisterCallback= (IRegisterCallback) ctx;
     }
 
@@ -39,75 +39,69 @@ public class RetrofitUtil {
         restClient.registerAPI ( email, password, username ).enqueue ( new Callback<RegisterAPI> ( ) {
             @Override
             public void onResponse(Call<RegisterAPI> call, Response<RegisterAPI> response) {
-              iRegisterCallback.getRegisterResponse (response);
-            }
-
-            @Override
-            public void onFailure(Call <RegisterAPI> call, Throwable t) {
-
-                iRegisterCallback.getRegisterResponse (t);
-
-            }
-        } );
-
-    }
-
-
-    public void LoginResponse(String email,String password)
-    {
-
-       restClient.loginAPI(email,password).enqueue(new Callback<LoginAPI>() {
-           @Override
-           public void onResponse(Call<LoginAPI> call, Response<LoginAPI> response) {
-
-               iRegisterCallback.getRegisterResponse (response);
-
-           }
-
-           @Override
-           public void onFailure(Call<LoginAPI> call, Throwable t) {
-
-               iRegisterCallback.getRegisterResponse (t);
-
-           }
-       });
-    }
-
-
-
-    public void ForgetpwdResponse(String email)
-    {
-        restClient.forgotpwdAPI(email).enqueue(new Callback<ForgetPwdAPI>() {
-            @Override
-            public void onResponse(Call<ForgetPwdAPI> call, Response<ForgetPwdAPI> response) {
-
                 iRegisterCallback.getRegisterResponse (response);
-
-            }
-
-            @Override
-            public void onFailure(Call<ForgetPwdAPI> call, Throwable t) {
-
+                }
+                @Override
+                public void onFailure(Call <RegisterAPI> call, Throwable t) {
                 iRegisterCallback.getRegisterResponse (t);
+                }
 
-            }
-        });
+
+
+
+                public void LoginResponse(String email,String password)
+                {
+                    restClient.loginAPI(email,password).enqueue(new Callback<LoginAPI>() {
+                        @Override
+                        public void onResponse(Call<LoginAPI> call, Response<LoginAPI> response) {
+
+                            iRegisterCallback.getRegisterResponse (response);
+
+                            }
+                            @Override
+                            public void onFailure(Call<LoginAPI> call, Throwable t) {
+
+                            iRegisterCallback.getRegisterResponse (t);
+
+                            }
+                            });
+                    }
+                    public void ForgetpwdResponse(String email)
+                    {
+                        restClient.forgotpwdAPI(email).enqueue(new Callback<ForgetPwdAPI>() {
+                            @Override
+                            public void onResponse(Call<ForgetPwdAPI> call, Response<ForgetPwdAPI> response) {
+
+                                iRegisterCallback.getRegisterResponse (response);
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<ForgetPwdAPI> call, Throwable t) {
+
+                                iRegisterCallback.getRegisterResponse (t);
+
+                                }
+                                });
+                        }
+                        }
+        );
     }
 
 
     public void profileHomeResponse(String image)
     {
-       restClient.profilehomeAPI(image).enqueue(new Callback<ProfileHomeAPI>() {
-           @Override
-           public void onResponse(Call<ProfileHomeAPI> call, Response<ProfileHomeAPI> response) {
+        restClient.profilehomeAPI(image).enqueue(new Callback<ProfileHomeAPI>() {
+            @Override
+            public void onResponse(Call<ProfileHomeAPI> call, Response<ProfileHomeAPI> response) {
 
-           }
+            }
 
-           @Override
-           public void onFailure(Call<ProfileHomeAPI> call, Throwable t) {
+            @Override
+            public void onFailure(Call<ProfileHomeAPI> call, Throwable t) {
 
-           }
-       });
+            }
+        });
     }
 
 
