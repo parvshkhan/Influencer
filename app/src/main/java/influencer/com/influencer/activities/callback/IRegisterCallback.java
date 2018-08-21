@@ -6,5 +6,12 @@ import retrofit2.Response;
 
 
 public interface IRegisterCallback {
-    void getRegisterResponse(Object  object);
+    void getRegisterResponseSuccess(Response<RegisterAPI>  registerAPIResponse);
+    void getRegisterFailure(Throwable  registerAPIResponse);
+
+
 }
+
+
+
+

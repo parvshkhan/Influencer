@@ -1,9 +1,13 @@
 package influencer.com.influencer.activities.apiResponses.registerAPI;
 
+/**
+ * Created by android on 21/8/18.
+ */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginAPI {
+public class FacebookApi {
 
     @SerializedName("success")
     @Expose

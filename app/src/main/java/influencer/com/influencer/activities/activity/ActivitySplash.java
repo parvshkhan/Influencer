@@ -52,8 +52,6 @@ public class ActivitySplash extends AppCompatActivity {
                         }
                         LoginManager.getInstance().logOut();
                         Hawk.delete(Contants.USER_EMAIL);
-                        Hawk.delete(Contants.USER_IMAGE);
-
 
                     }
 

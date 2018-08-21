@@ -32,8 +32,6 @@ public class FragmentProfile extends Fragment {
         View view= inflater.inflate(R.layout.fragment_four, container, false);
         ButterKnife.bind ( this,view );
 
-        Uri image= Hawk.get(Contants.USER_IMAGE);
-        Picasso.with(getActivity()).load(image).error(R.drawable.icon_user).into(profileimage);
 
         name.setText(Hawk.get(Contants.USER_EMAIL)+"");
         return view;

@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import influencer.com.influencer.activities.apiResponses.registerAPI.FacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.ProfileHomeAPI;
@@ -26,6 +27,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class RestClient {
 
@@ -46,8 +48,6 @@ public class RestClient {
         logging.setLevel ( HttpLoggingInterceptor.Level.BODY );
 
 
-
-
         GitApiInterface gitApiInterface = retrofit.create ( GitApiInterface.class );
 
         return gitApiInterface;
@@ -63,28 +63,32 @@ public class RestClient {
         @FormUrlEncoded
         @POST("Register")
         Call <RegisterAPI> registerAPI(@Field("Email") String Email,
-                                       @Field("Password") String Password, @Field("UserName") String UserName);
-        @FormUrlEncoded
-        @POST("Register")
-        Call <LoginAPI> loginAPI(@Field("Email") String Email,
-                                        @Field("Password") String Password);
+                                       @Field("Password") String Password);
+//-------------forget password ----------------------------------------------------------------------------
 
         @FormUrlEncoded
-        @POST("Register")
+        @POST("ForgotPassword")
         Call <ForgetPwdAPI> forgotpwdAPI(@Field("Email") String Email
 
         );
 
+//facebooklogin-------------------------------------------------------------------------------------------
+
         @FormUrlEncoded
-        @POST("Register")
-        Call <ProfileHomeAPI> profilehomeAPI(@Field("image") String Email
+        @POST("FacebookLogin")
+        Call <FacebookApi> facebookAPI(@Field("Email") String Email,
+                                       @Field("id") String Password,
+                                       @Field("firstname") String firstname,
+                                       @Field("lastname") String lastname,
+                                       @Field("link") String link
 
         );
 
+//login api--------------------------------------------------------------------------------------------
         @FormUrlEncoded
-        @POST("Register")
-        Call <UserProfileAPI> userprofileAPI(@Field("image") String Email
-
+        @POST("Login")
+        Call <LoginAPI> loginAPI(@Field("Email") String Email,
+                                       @Field("Password") String Password
         );
 
     }

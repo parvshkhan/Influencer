@@ -1,5 +1,6 @@
 package influencer.com.influencer.activities.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,8 +52,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
+import influencer.com.influencer.activities.callback.IForgetPasswordCallback;
+import influencer.com.influencer.activities.callback.ILoginCallback;
 import influencer.com.influencer.activities.callback.IRegisterCallback;
 import influencer.com.influencer.activities.constants.Contants;
 import influencer.com.influencer.activities.retrofit.RetrofitUtil;
@@ -62,7 +66,7 @@ import static android.os.Build.ID;
 import static android.provider.ContactsContract.Intents.Insert.EMAIL;
 import static android.provider.ContactsContract.Intents.Insert.PHONE;
 
-public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener, IRegisterCallback {
+public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener,IForgetPasswordCallback,ILoginCallback {
 
     @BindView(R.id.register_move)
     TextView tvregisterNow;
@@ -96,6 +100,10 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     private ProfileTracker profileTracker;
     private Uri imgUrlFb;
 
+    ProgressDialog progressDialog;
+    AlertDialog.Builder   dialogBuilder;
+    AlertDialog alertDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +111,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         setContentView(R.layout.activity_login_infuencer);
 //        hidingTheStatusBar();
         ButterKnife.bind(this);
+
 
 
 
@@ -118,6 +127,8 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         imm.hideSoftInputFromWindow(edPassword.getWindowToken(), 0);
 
 
+
+
     }
 
 //    private void hidingTheStatusBar() {
@@ -130,13 +141,13 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
     @Override
     public void onValidationSucceeded() {
+        progressDialog=new ProgressDialog ( ActivityLogin.this );
+        progressDialog.setMessage ( "Please Wait..." );
 
+progressDialog.show ();
 
-        Intent intent = new Intent(getApplicationContext(), ActivitySelectIntrest.class);
-        startActivity(intent);
-
-//        RetrofitUtil retrofitUtil = new RetrofitUtil (ActivityLogin.this);
-//        retrofitUtil.LoginResponse (edLogin.getText().toString(),edPassword.getText().toString());
+        RetrofitUtil retrofitUtil = new RetrofitUtil (ActivityLogin.this);
+        retrofitUtil.LoginResponse (edLogin.getText().toString(),edPassword.getText().toString());
 
     }
 
@@ -178,20 +189,24 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     //forgot password validations with button click--------------------------------------------------------------------------
 
 
+
+
+
     @OnClick(R.id.textView3)
     public void openforgetpassword() {
 
 
 
 
-        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+         dialogBuilder = new AlertDialog.Builder(this);
 
         view = LayoutInflater.from(ActivityLogin.this).inflate(R.layout.activity_forget_password, null);
 
 
         dialogBuilder.setView(view);
 
-        final AlertDialog alertDialog = dialogBuilder.create();
+
+        alertDialog = dialogBuilder.create();
         final EditText etemail = view.findViewById(R.id.forgotemail);
 
         view.findViewById(R.id.forgotcencelbtn).setOnClickListener(new View.OnClickListener() {
@@ -214,8 +229,13 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                 if (email.matches("[a-zA-Z0-9._-]+@[a-z]+.[ a-z]+") && email.length()>0)
 
                 {
+                    progressDialog=new ProgressDialog ( view.getContext () );
+                    progressDialog.setMessage ( "Please wait..." );
+                    progressDialog.show ();
 
-                    Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_LONG).show();
+
+                    RetrofitUtil retrofitUtil = new RetrofitUtil ( ActivityLogin.this );
+                    retrofitUtil.ForgetResponse ( etemail.getText ().toString () );
 
 
 
@@ -232,24 +252,16 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         alertDialog.show();
     }
 
-    //---------------------------------------------------------------------------------------------------------------------------
-
-    @Override
-    public void getRegisterResponse(Object response) {
-
-        if (response instanceof Throwable) {
-
-            Toast.makeText(getApplicationContext(), "Api crashed", Toast.LENGTH_SHORT).show();
-        } else if (response instanceof Response) {
-            Response<LoginAPI> forgotpwdrAPI = (Response<LoginAPI>) response;
+    //----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-        }
-
-    }
 
 
-// ------------------Facebook Integration with button click------------------------------------------------------------------------
+
+
+
+
+// ------------------Facebook Integration with button click-----------------------------------------------------------------------------------------------
     @OnClick(R.id.regfbbtn)
     public void facebooklogin()
     {
@@ -257,7 +269,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
         loginManager.getInstance().logInWithReadPermissions(ActivityLogin.this, Arrays.asList("public_profile","email"));
 
-       loginManager.getInstance().registerCallback(callbackManager,
+        loginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -290,13 +302,13 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-    //-------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
 
-    //-----------------------Facebook Integration -------------------------------------------------------------------------------
+    //-----------------------Facebook Integration -----------------------------------------------------------------------------------------------------
     private void setFacebookData(final LoginResult loginResult)
     {
 
@@ -310,8 +322,12 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                             Log.i("Response",response.toString());
 
 //
-                            final Uri image=Profile.getCurrentProfile().getProfilePictureUri(200,200);
-                            Hawk.put(Contants.USER_IMAGE,image);
+                          String firstname=response.getJSONObject ().getString ( "first_name" );
+                          String lastname=response.getJSONObject ().getString ( "last_name" );
+                          String id=response.getJSONObject ().getString ( "id" );
+                          String link="https://www.facebook.com/profile.php?id=";
+
+
 
                             if(response.getJSONObject().has("email"))
                             {
@@ -358,7 +374,6 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                                            Hawk.put(Contants.USER_EMAIL,email);
 
                                            Intent intent=new Intent(getApplicationContext(),ActivitySelectIntrest.class);
-                                           Hawk.put(Contants.USER_IMAGE,image);
 
                                            startActivity(intent);
 
@@ -381,12 +396,65 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,email,name,gender");
+        parameters.putString("fields", "id,email,first_name,last_name");
         request.setParameters(parameters);
         request.executeAsync();
 
     }
 
-    //-------------------------------------------------------------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    @Override
+    public void getRegisterResponseSuccess(Response <ForgetPwdAPI> forgetPwdAPIResponse) {
+
+        if(forgetPwdAPIResponse.body ( ) != null) {
+            if(forgetPwdAPIResponse.body ().getSuccess ()) {
+              Toast.makeText ( getApplicationContext (),forgetPwdAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+alertDialog.dismiss ();
+
+              progressDialog.hide ();
+
+
+
+            } else {
+                Toast.makeText ( getApplicationContext (),forgetPwdAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+
+                progressDialog.hide ();
+            }
+
+        }
+
+    }
+
+    @Override
+    public void getLoginResponseSuccess(Response <LoginAPI> loginAPIResponse) {
+
+        if(loginAPIResponse.body ( ) != null) {
+            if(loginAPIResponse.body ().getSuccess ()) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+
+
+            } else {
+                Toast.makeText ( getApplicationContext (),loginAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+
+                progressDialog.hide ();
+            }
+
+        }
+
+
+    }
+
+    @Override
+    public void getRegisterFailure(Throwable registerAPIResponse) {
+
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 }

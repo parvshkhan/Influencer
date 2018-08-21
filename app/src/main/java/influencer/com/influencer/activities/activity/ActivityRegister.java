@@ -1,7 +1,9 @@
 package influencer.com.influencer.activities.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,12 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,7 +32,7 @@ import influencer.com.influencer.activities.callback.IRegisterCallback;
 import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 import retrofit2.Response;
 
-public class ActivityRegister extends AppCompatActivity implements Validator.ValidationListener,IRegisterCallback {
+public class ActivityRegister extends AppCompatActivity implements Validator.ValidationListener, IRegisterCallback {
 
     @BindView(R.id.login_move)
     TextView tvLogin;
@@ -36,11 +41,8 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     Button btRegister;
 
 
-  private Validator validator;
+    private Validator validator;
 
-    @BindView(R.id.login_email)
-    @NotEmpty
-    EditText edUserName;
 
     @BindView(R.id.login_password)
     @NotEmpty
@@ -61,6 +63,11 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         ButterKnife.bind ( this );
         validator = new Validator ( this );
         validator.setValidationListener ( this );
+
+
+//        List<String> strings = new LinkedList <> ();
+//
+//        strings.remove ( 0);
     }
 
 
@@ -73,8 +80,9 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     @Override
     public void onValidationSucceeded() {
 
-        RetrofitUtil retrofitUtil = new RetrofitUtil (ActivityRegister.this);
-        retrofitUtil.RegisterResponse ( edUserName.getText ().toString (),edEmail.getText ().toString (),edPassword.getText ().toString ());
+
+        RetrofitUtil retrofitUtil = new RetrofitUtil ( ActivityRegister.this );
+        retrofitUtil.RegisterResponse (edEmail.getText ( ).toString ( ),edPassword.getText ( ).toString ( ));
     }
 
     @Override
@@ -108,26 +116,24 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         validator.validate ( );
     }
 
+
     @Override
-    public void getRegisterResponse(Object response) {
+    public void getRegisterResponseSuccess(Response <RegisterAPI> registerAPIResponse) {
+        if(registerAPIResponse.body ( ) != null) {
+            if(registerAPIResponse.body ( ).getSuccess ( )) {
 
+                startActivity(new Intent (getApplicationContext(),ActivitySelectIntrest.class));
+                finish();
 
-        if(response instanceof Throwable)
-        {
-
-            Toast.makeText ( getApplicationContext (), "Api crashed", Toast.LENGTH_SHORT ).show ( );
-        }
-        else
-        if(response instanceof Response)
-        {
-            Response <RegisterAPI> registerAPI = (Response<RegisterAPI>) response;
-
-
-
+            } else {
+                Log.d ( "message", registerAPIResponse.body ( ).getMessage ( ) );
+            }
 
         }
+    }
 
-
-
+    @Override
+    public void getRegisterFailure(Throwable throwable) {
+        throwable.printStackTrace ( );
     }
 }

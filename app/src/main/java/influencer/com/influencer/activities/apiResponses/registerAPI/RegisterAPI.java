@@ -12,12 +12,15 @@ public class RegisterAPI {
     @SerializedName("success")
     @Expose
     private Boolean success;
+
     @SerializedName("Message")
     @Expose
     private String message;
+
     @SerializedName("status")
     @Expose
     private String status;
+
     @SerializedName("InfluencerID")
     @Expose
     private String influencerID;
