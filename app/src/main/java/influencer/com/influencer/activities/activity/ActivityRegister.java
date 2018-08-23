@@ -12,15 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -81,7 +78,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     public void onValidationSucceeded() {
 
 
-        RetrofitUtil retrofitUtil = new RetrofitUtil ( ActivityRegister.this );
+        RetrofitUtil retrofitUtil = new RetrofitUtil( ActivityRegister.this );
         retrofitUtil.RegisterResponse (edEmail.getText ( ).toString ( ),edPassword.getText ( ).toString ( ));
     }
 

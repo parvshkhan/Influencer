@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.FaceDetector;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,14 +24,11 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -54,17 +48,13 @@ import butterknife.OnClick;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
-import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
 import influencer.com.influencer.activities.callback.IForgetPasswordCallback;
 import influencer.com.influencer.activities.callback.ILoginCallback;
-import influencer.com.influencer.activities.callback.IRegisterCallback;
 import influencer.com.influencer.activities.constants.Contants;
 import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 import retrofit2.Response;
 
-import static android.os.Build.ID;
-import static android.provider.ContactsContract.Intents.Insert.EMAIL;
-import static android.provider.ContactsContract.Intents.Insert.PHONE;
+
 
 public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener,IForgetPasswordCallback,ILoginCallback {
 
@@ -146,7 +136,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
 progressDialog.show ();
 
-        RetrofitUtil retrofitUtil = new RetrofitUtil (ActivityLogin.this);
+        RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityLogin.this);
         retrofitUtil.LoginResponse (edLogin.getText().toString(),edPassword.getText().toString());
 
     }
@@ -234,8 +224,8 @@ progressDialog.show ();
                     progressDialog.show ();
 
 
-                    RetrofitUtil retrofitUtil = new RetrofitUtil ( ActivityLogin.this );
-                    retrofitUtil.ForgetResponse ( etemail.getText ().toString () );
+                    RetrofitUtil retrofitUtil = new RetrofitUtil( ActivityLogin.this );
+                    retrofitUtil.ForgetpwdResponse( etemail.getText ().toString () );
 
 
 
@@ -290,7 +280,7 @@ progressDialog.show ();
                     @Override
                     public void onError(FacebookException exception) {
 
-                        Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
+                       Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -323,8 +313,8 @@ progressDialog.show ();
 
 //
                           String firstname=response.getJSONObject ().getString ( "first_name" );
-                          String lastname=response.getJSONObject ().getString ( "last_name" );
-                          String id=response.getJSONObject ().getString ( "id" );
+                          String lastname=response.getJSONObject ().getString ( "user_name" );
+                          String id=response.getJSONObject ().getString ( "user_id" );
                           String link="https://www.facebook.com/profile.php?id=";
 
 

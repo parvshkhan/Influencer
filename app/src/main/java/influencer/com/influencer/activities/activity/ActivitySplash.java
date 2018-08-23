@@ -15,9 +15,7 @@ import com.orhanobut.hawk.Hawk;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.constants.Contants;
 
-/**
- * Created by android on 3/8/18.
- */
+
 
 public class ActivitySplash extends AppCompatActivity {
 
@@ -85,10 +83,12 @@ public boolean isFbLogin()
 {
     AccessToken accessToken = AccessToken.getCurrentAccessToken();
     return accessToken != null && !accessToken.isExpired();
-}public boolean isCustomLogin()
+}
+public boolean isCustomLogin()
 {
    return false;
-}public boolean isInstaLogin()
+}
+boolean isInstaLogin()
 {
    return false;
 }
