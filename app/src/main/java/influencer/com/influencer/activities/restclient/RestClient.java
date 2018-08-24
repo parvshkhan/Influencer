@@ -76,8 +76,8 @@ public class RestClient {
 
         @FormUrlEncoded
         @POST("FacebookLogin")
-        Call <FacebookApi> facebookAPI(@Field("Email") String Email,
-                                       @Field("id") String Password,
+        Call <FacebookApi> facebookAPI(@Field("email") String Email,
+                                       @Field("id") String id,
                                        @Field("firstname") String firstname,
                                        @Field("lastname") String lastname,
                                        @Field("link") String link

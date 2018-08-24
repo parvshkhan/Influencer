@@ -1,5 +1,6 @@
 package influencer.com.influencer.activities.activity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +11,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,9 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.orhanobut.hawk.Hawk;
+import com.steelkiwi.instagramhelper.InstagramHelper;
+import com.steelkiwi.instagramhelper.InstagramHelperConstants;
+import com.steelkiwi.instagramhelper.model.InstagramUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,8 +53,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.customtoast.CustomToast;
+import influencer.com.influencer.activities.apiResponses.registerAPI.FacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
+import influencer.com.influencer.activities.application.MyApplication;
+import influencer.com.influencer.activities.callback.IFacebookCallback;
 import influencer.com.influencer.activities.callback.IForgetPasswordCallback;
 import influencer.com.influencer.activities.callback.ILoginCallback;
 import influencer.com.influencer.activities.constants.Contants;
@@ -56,7 +67,7 @@ import retrofit2.Response;
 
 
 
-public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener,IForgetPasswordCallback,ILoginCallback {
+public class ActivityLogin extends AppCompatActivity implements Validator.ValidationListener,IForgetPasswordCallback,ILoginCallback ,IFacebookCallback{
 
     @BindView(R.id.register_move)
     TextView tvregisterNow;
@@ -77,6 +88,9 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     @Email(message = "Please enter the valid email")
     EditText edLogin;
 
+    @BindView(R.id.reg_insta_btn)
+    Button loginwithinsta;
+
     @BindView(R.id.login_password)
     @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE)
     EditText edPassword;
@@ -84,6 +98,8 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     CallbackManager callbackManager;
     LoginManager loginManager;
 
+
+    private InstagramHelper instagramHelper;
 
     String email,gender,facebookName,phoneno;
     int profilePictureView;
@@ -102,6 +118,8 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 //        hidingTheStatusBar();
         ButterKnife.bind(this);
 
+        instagramHelper = MyApplication.getInstagramHelper();
+
 
 
 
@@ -115,6 +133,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(edPassword.getWindowToken(), 0);
+
 
 
 
@@ -133,8 +152,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     public void onValidationSucceeded() {
         progressDialog=new ProgressDialog ( ActivityLogin.this );
         progressDialog.setMessage ( "Please Wait..." );
-
-progressDialog.show ();
+        progressDialog.show ();
 
         RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityLogin.this);
         retrofitUtil.LoginResponse (edLogin.getText().toString(),edPassword.getText().toString());
@@ -188,7 +206,7 @@ progressDialog.show ();
 
 
 
-         dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder = new AlertDialog.Builder(this);
 
         view = LayoutInflater.from(ActivityLogin.this).inflate(R.layout.activity_forget_password, null);
 
@@ -248,10 +266,7 @@ progressDialog.show ();
 
 
 
-
-
-
-// ------------------Facebook Integration with button click-----------------------------------------------------------------------------------------------
+    // ------------------Facebook Integration with button click-----------------------------------------------------------------------------------------------
     @OnClick(R.id.regfbbtn)
     public void facebooklogin()
     {
@@ -265,7 +280,8 @@ progressDialog.show ();
                     public void onSuccess(LoginResult loginResult) {
 
 
-
+                        startActivity(new Intent(getApplicationContext(),ActivitySelectIntrest.class));
+                        finish();
 
                         setFacebookData(loginResult);
 
@@ -273,14 +289,16 @@ progressDialog.show ();
                     @Override
                     public void onCancel() {
 
-                        Toast.makeText(getApplicationContext(),"cencel",Toast.LENGTH_LONG).show();
+                        String cencel="cencel";
+                        new CustomToast(getApplicationContext(),cencel);
 
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
 
-                       Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
+                        String cencel="error";
+                        new CustomToast(getApplicationContext(),cencel);
 
                     }
                 });
@@ -291,8 +309,32 @@ progressDialog.show ();
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == InstagramHelperConstants.INSTA_LOGIN && resultCode == RESULT_OK) {
+
+            InstagramUser user = instagramHelper.getInstagramUser(this);
+            String message="Login success";
+            new CustomToast(getApplicationContext(),message);
+
+
+
+
+            Intent intent=new Intent(ActivityLogin.this,ActivitySelectIntrest.class);
+            startActivity(intent);
+            finish();
+
+
+
+        } else {
+
+//            Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show();
+
+        }
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 
@@ -305,24 +347,29 @@ progressDialog.show ();
         final GraphRequest request = GraphRequest.newMeRequest(
                 loginResult.getAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
+                    @SuppressLint("LongLogTag")
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        // Application code
+
+
                         try {
                             Log.i("Response",response.toString());
+                            String id=response.getJSONObject().getString("id");
+                            String link="https://www.facebook.com/"+id;
+                            String firstname=response.getJSONObject().getString("first_name");
+                            String lastname=response.getJSONObject().getString("last_name");
 
-//
-                          String firstname=response.getJSONObject ().getString ( "first_name" );
-                          String lastname=response.getJSONObject ().getString ( "user_name" );
-                          String id=response.getJSONObject ().getString ( "user_id" );
-                          String link="https://www.facebook.com/profile.php?id=";
-
-
+                            Hawk.put(Contants.USER_PROFILELINK,link);
+                            Hawk.put(Contants.USER_ID,id);
+                            Hawk.put(Contants.USER_FIRSTNAME,firstname);
+                            Hawk.put(Contants.USER_LASTNAME,lastname);
 
                             if(response.getJSONObject().has("email"))
                             {
                                 String email=response.getJSONObject().getString("email");
                                 Hawk.put(Contants.USER_EMAIL,email);
+
+                                senduserdetails();
 
 
                             }
@@ -353,26 +400,22 @@ progressDialog.show ();
                                 });
 
 
-                               login.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       String email = etemail.getText().toString();
+                                login.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        String email = etemail.getText().toString();
 
-                                       if (email.matches("[a-zA-Z0-9._-]+@[a-z]+.[ a-z]+") && email.length()>0)
+                                        if (email.matches("[a-zA-Z0-9._-]+@[a-z]+.[ a-z]+") && email.length()>0)
 
-                                       {
-                                           Hawk.put(Contants.USER_EMAIL,email);
+                                        {
+                                            Hawk.put(Contants.USER_EMAIL,email);
+                                            senduserdetails();
 
-                                           Intent intent=new Intent(getApplicationContext(),ActivitySelectIntrest.class);
-
-                                           startActivity(intent);
-
-
-                                       } else {
-                                           etemail.setError("Invalid Email");
-                                       }
-                                   }
-                               });
+                                        } else {
+                                            etemail.setError("Invalid Email");
+                                        }
+                                    }
+                                });
 
                                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
@@ -392,7 +435,14 @@ progressDialog.show ();
 
     }
 
+    private void senduserdetails() {
 
+        RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityLogin.this);
+        retrofitUtil.FacebookapiResponse(Hawk.get(Contants.USER_EMAIL,""),Hawk.get(Contants.USER_ID,""),Hawk.get(Contants.USER_FIRSTNAME,""),Hawk.get(Contants.USER_LASTNAME,""), Hawk.get(Contants.USER_PROFILELINK,""));
+
+
+
+    }
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -403,15 +453,17 @@ progressDialog.show ();
 
         if(forgetPwdAPIResponse.body ( ) != null) {
             if(forgetPwdAPIResponse.body ().getSuccess ()) {
-              Toast.makeText ( getApplicationContext (),forgetPwdAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
-alertDialog.dismiss ();
+                String message=forgetPwdAPIResponse.body().getMessage();
+               new CustomToast(getApplicationContext(),message);
+                alertDialog.dismiss();
 
-              progressDialog.hide ();
+                progressDialog.hide ();
 
 
 
             } else {
-                Toast.makeText ( getApplicationContext (),forgetPwdAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+                String error=forgetPwdAPIResponse.body().getMessage();
+               new CustomToast(getApplicationContext(),error);
 
                 progressDialog.hide ();
             }
@@ -425,12 +477,14 @@ alertDialog.dismiss ();
 
         if(loginAPIResponse.body ( ) != null) {
             if(loginAPIResponse.body ().getSuccess ()) {
+
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
+                progressDialog.hide();
 
 
             } else {
-                Toast.makeText ( getApplicationContext (),loginAPIResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+                new CustomToast(getApplicationContext(),loginAPIResponse.body().getMessage());
 
                 progressDialog.hide ();
             }
@@ -443,8 +497,54 @@ alertDialog.dismiss ();
     @Override
     public void getRegisterFailure(Throwable registerAPIResponse) {
 
+
+
+
+    }
+
+
+
+    @Override
+    public void getFacebookResponseSuccess(Response<FacebookApi> facebookApiResponse) {
+
+        if(facebookApiResponse.body ( ) != null) {
+            if(facebookApiResponse.body ().getSuccess ()) {
+
+                Log.i("","Response:"+facebookApiResponse.body().getMessage());
+
+
+            } else {
+
+                Toast.makeText ( getApplicationContext (),facebookApiResponse.body ().getMessage (),Toast.LENGTH_SHORT ).show ();
+
+            }
+
+        }
+
+    }
+
+    @Override
+    public void getFacebookFailure(Throwable facebookAPIResponse) {
+
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+    //--------------------------------------  INSTAGRAM LOGIN  --------------------------------------------------------------------
+    @OnClick(R.id.reg_insta_btn)
+   public void instaloginbtnclick()
+    {
+        instagramHelper.loginFromActivity(this);
+    }
+
+
+
+
+
+
+
 
 
 }

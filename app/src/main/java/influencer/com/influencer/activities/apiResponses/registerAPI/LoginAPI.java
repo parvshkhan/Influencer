@@ -8,6 +8,7 @@ public class LoginAPI {
     @SerializedName("success")
     @Expose
     private Boolean success;
+
     @SerializedName("message")
     @Expose
     private String message;

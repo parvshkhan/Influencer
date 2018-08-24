@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
+import com.steelkiwi.instagramhelper.InstagramHelper;
 
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.constants.Contants;
@@ -26,6 +29,7 @@ public class ActivitySplash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         hidingTheStatusBar();
         setContentView(R.layout.activity_splash);
+
 
 
 
@@ -86,10 +90,13 @@ public boolean isFbLogin()
 }
 public boolean isCustomLogin()
 {
+
    return false;
 }
 boolean isInstaLogin()
 {
+
+
    return false;
 }
 }

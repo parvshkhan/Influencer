@@ -118,7 +118,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/loginbtn"
             app:layout_constraintTop_toBottomOf="@+id/loginbtn"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/login_move"

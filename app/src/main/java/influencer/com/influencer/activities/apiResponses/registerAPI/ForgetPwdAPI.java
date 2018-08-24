@@ -8,7 +8,7 @@ public class ForgetPwdAPI {
     @SerializedName("success")
     @Expose
     private Boolean success;
-    @SerializedName("Message")
+    @SerializedName("message")
     @Expose
     private String message;
 

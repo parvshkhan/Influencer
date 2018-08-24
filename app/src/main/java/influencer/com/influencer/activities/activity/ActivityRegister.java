@@ -1,5 +1,6 @@
 package influencer.com.influencer.activities.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,8 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     @Password(min = 6, scheme = Password.Scheme.ANY)
     EditText edPassword;
 
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,11 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     @Override
     public void onValidationSucceeded() {
 
+        progressDialog=new ProgressDialog ( this);
+        progressDialog.setMessage ( "Please wait..." );
+        progressDialog.show ();
+
+
 
         RetrofitUtil retrofitUtil = new RetrofitUtil( ActivityRegister.this );
         retrofitUtil.RegisterResponse (edEmail.getText ( ).toString ( ),edPassword.getText ( ).toString ( ));
@@ -88,7 +96,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
             View view = error.getView ( );
             String message = error.getCollatedErrorMessage ( this );
 
-            // Display error messages ;)
+
             if(view instanceof EditText) {
                 ((EditText) view).setError ( message );
             } else {
@@ -121,9 +129,13 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
 
                 startActivity(new Intent (getApplicationContext(),ActivitySelectIntrest.class));
                 finish();
+                progressDialog.hide();
 
             } else {
                 Log.d ( "message", registerAPIResponse.body ( ).getMessage ( ) );
+                Toast.makeText(getApplicationContext(),registerAPIResponse.body().getMessage(),Toast.LENGTH_LONG).show();
+
+
             }
 
         }
