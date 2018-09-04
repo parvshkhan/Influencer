@@ -11,17 +11,13 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -30,7 +26,6 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
-
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -42,13 +37,10 @@ import com.orhanobut.hawk.Hawk;
 import com.steelkiwi.instagramhelper.InstagramHelper;
 import com.steelkiwi.instagramhelper.InstagramHelperConstants;
 import com.steelkiwi.instagramhelper.model.InstagramUser;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -280,8 +272,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
                     public void onSuccess(LoginResult loginResult) {
 
 
-                        startActivity(new Intent(getApplicationContext(),ActivitySelectIntrest.class));
-                        finish();
+
 
                         setFacebookData(loginResult);
 
@@ -307,8 +298,11 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
         super.onActivityResult(requestCode, resultCode, data);
+
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
 
 
         if (requestCode == InstagramHelperConstants.INSTA_LOGIN && resultCode == RESULT_OK) {
@@ -325,10 +319,6 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
             finish();
 
 
-
-        } else {
-
-//            Toast.makeText(this, "Login failed", Toast.LENGTH_LONG).show();
 
         }
     }
@@ -512,6 +502,9 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
                 Log.i("","Response:"+facebookApiResponse.body().getMessage());
 
+                startActivity(new Intent(getApplicationContext(),ActivitySelectIntrest.class));
+                finish();
+
 
             } else {
 
@@ -538,12 +531,6 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
     {
         instagramHelper.loginFromActivity(this);
     }
-
-
-
-
-
-
 
 
 

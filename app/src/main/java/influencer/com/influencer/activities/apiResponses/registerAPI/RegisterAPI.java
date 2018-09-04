@@ -13,7 +13,7 @@ public class RegisterAPI {
     @Expose
     private Boolean success;
 
-    @SerializedName("Message")
+    @SerializedName("message")
     @Expose
     private String message;
 

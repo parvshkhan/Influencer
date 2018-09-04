@@ -19,11 +19,13 @@
         <activity
             android:name=".activities.activity.ActivitySplash"
             android:windowSoftInputMode="stateHidden">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".activities.activity.MainActivity"
@@ -37,7 +39,9 @@
         <activity
             android:name=".activities.activity.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activities.activity.ActivitySelectIntrest" />
+        <activity android:name=".activities.activity.ActivitySelectIntrest" >
+
+        </activity>
         <activity android:name=".activities.activity.ActivityPost" />
 
 

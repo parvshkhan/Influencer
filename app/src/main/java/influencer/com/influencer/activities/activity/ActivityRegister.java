@@ -134,6 +134,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
             } else {
                 Log.d ( "message", registerAPIResponse.body ( ).getMessage ( ) );
                 Toast.makeText(getApplicationContext(),registerAPIResponse.body().getMessage(),Toast.LENGTH_LONG).show();
+                progressDialog.hide();
 
 
             }

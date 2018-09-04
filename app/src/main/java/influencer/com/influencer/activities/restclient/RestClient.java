@@ -35,6 +35,7 @@ public class RestClient {
     public static GitApiInterface getClient() {
 
         String baseUrl = "http://192.168.0.61/InfluencerAPI/";
+//        String baseUrl = "https://app.influencernetwork.be/InfluencerAPI/";
 
         OkHttpClient client = new OkHttpClient.Builder ( )
                 .connectTimeout ( 100, TimeUnit.SECONDS )
