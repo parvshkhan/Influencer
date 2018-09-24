@@ -49,13 +49,11 @@ android:paddingBottom="@dimen/_5sdp"
             android:layout_marginEnd="8dp"
             android:textCursorDrawable="@drawable/color_cursor"
             android:layout_marginStart="8dp"
-
             android:layout_marginTop="24dp"
             android:background="@drawable/loginedittextbg"
             android:drawableLeft="@drawable/ic_email"
             android:drawablePadding="@dimen/_10sdp"
             android:ems="10"
-
             android:hint="EMAIL ADDRESS"
             android:inputType="textEmailAddress"
             android:maxLines="1"

@@ -7,8 +7,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.igalata.bubblepicker.BubblePickerListener;
+import com.igalata.bubblepicker.BubbleSize;
 import com.igalata.bubblepicker.model.PickerItem;
 import com.igalata.bubblepicker.rendering.BubblePicker;
+import com.orhanobut.hawk.Hawk;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
@@ -16,32 +19,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.constants.Contants;
 
 public class ActivitySelectIntrest extends AppCompatActivity {
     BubblePicker bubblePicker;
     @BindView (R.id.interestnext)
     Button interestnextbtn;
-    @BindView(R.id.interestskip)
-    TextView interestskip;
+    String items;
 
 
-    String[] name={
-            "Food",
-            "Food",
-            "Beauty",
-            "Beauty",
-            "Lifestyle",
-            "Lifestyle",
-            "Baby",
-            "Baby",
-            "Intertainment",
-            "Intertainment",
-            "Interior",
-            "Health",
-            "Adventure",
-            "Sports",
-            "Travel"
-    };
+
+    String[] name={"Food", "Food", "Beauty", "Beauty", "Lifestyle", "Lifestyle", "Baby", "Baby", "Intertainment", "Intertainment", "Interior", "Health", "Adventure", "Sports", "Travel"};
 
 
     int[] colors = {
@@ -62,24 +50,7 @@ public class ActivitySelectIntrest extends AppCompatActivity {
             android.graphics.Color.parseColor("#043c75")
     };
 
-    int[] images = {
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower,
-            R.drawable.flower
-
-    };
+    int[] images = {R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower, R.drawable.flower};
 
 
 
@@ -87,10 +58,13 @@ public class ActivitySelectIntrest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_intrest);
-ButterKnife.bind(this);
+
+        ButterKnife.bind(this);
+
 
 
         bubblePicker = (BubblePicker) findViewById(R.id.picker);
+        bubblePicker.setBubbleSize(BubbleSize.LARGE);
         ArrayList<PickerItem> listitems =  new ArrayList<>();
         for (int i=0;i<name.length;i++){
 //            PickerItem item = new PickerItem(name[i],null, true , R.drawable.flower);
@@ -99,12 +73,16 @@ ButterKnife.bind(this);
             listitems.add(item);
 //            Drawable drawable = this.getResources().getDrawable(R.drawable.yourDrawableID);
         }
-        bubblePicker.setBubbleSize(15);
+
         bubblePicker.setItems(listitems);
+
+
         bubblePicker.setListener(new BubblePickerListener() {
             @Override
             public void onBubbleSelected(@NotNull PickerItem pickerItem) {
-//                Toast.makeText(ActivitySelectIntrest.this,pickerItem.getTitle()+" Added To Your Interest", Toast.LENGTH_SHORT).show();
+
+                items=String.valueOf(pickerItem.getTitle());
+                Hawk.put(Contants.ITEMS,items);
             }
 
             @Override
@@ -117,15 +95,12 @@ ButterKnife.bind(this);
     @OnClick(R.id.interestnext)
     public void openmainActivity()
     {
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent=new Intent(getApplicationContext(),ActivityAbout.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
         finish();
     }
-    @OnClick(R.id.interestskip)
-    public void openactivitymain()
-    {
-        openmainActivity();
-    }
+
 
 
 }

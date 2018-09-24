@@ -64,7 +64,9 @@ public class RestClient {
         @FormUrlEncoded
         @POST("Register")
         Call <RegisterAPI> registerAPI(@Field("Email") String Email,
-                                       @Field("Password") String Password);
+                                       @Field("Password") String Password,
+                                       @Field("ConfirmPassword") String Confirmpassword
+        );
 //-------------forget password ----------------------------------------------------------------------------
 
         @FormUrlEncoded
@@ -92,6 +94,44 @@ public class RestClient {
                                        @Field("Password") String Password
         );
 
+        //---setup api----------------------------------------------------------------------------------------
+        @FormUrlEncoded
+        @POST("SetUp")
+        Call <UserProfileAPI> userdetailapi(@Field("userid") String Email,
+                                       @Field("name") String name,
+                                       @Field("file") String file,
+                                       @Field("gender") String gender,
+                                       @Field("language") String language,
+                                       @Field("dob") String dob,
+                                       @Field("description") String description,
+                                       @Field("interest") String interest,
+                                       @Field("genderratio") String genderratio,
+                                       @Field("ageratio") String ageratio,
+                                       @Field("firstname") String firstname,
+                                       @Field("lastname") String lastname,
+                                       @Field("country") String country,
+                                       @Field("address") String address,
+                                       @Field("city") String city,
+                                       @Field("postalcode") String postalcode,
+                                       @Field("height") String height,
+                                       @Field("jeanlength") String jeanlength,
+                                       @Field("jeanwidth") String jeanwidth,
+                                       @Field("pants") String pants,
+                                       @Field("shirt") String shirt,
+                                       @Field("shoesize") String shoesize,
+                                       @Field("underwear") String underwear,
+                                       @Field("extrainfo") String extrainfo,
+                                       @Field("instaLink") String instaLink,
+                                       @Field("instaprofilepic") String instaprofilepic,
+                                       @Field("fbprofilepic") String fbprofilepic,
+                                       @Field("fbname") String fbname,
+                                       @Field("instaname") String instaname,
+                                       @Field("fblink") String fblink
+        );
+
     }
+
+
+
 }
 

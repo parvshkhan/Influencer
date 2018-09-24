@@ -38,25 +38,12 @@
         android:layout_marginStart="8dp"
         android:text="Select Interests"
         android:textColor="@color/white"
-        android:textStyle="bold"
         android:textSize="@dimen/_15ssp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
-        app:layout_constraintEnd_toStartOf="@+id/interestskip"
-        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/interestskip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_15ssp"
-        android:text="Skip"
-        android:textSize="@dimen/_15ssp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/textView26"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView26" />
 
     <Button
         android:id="@+id/interestnext"

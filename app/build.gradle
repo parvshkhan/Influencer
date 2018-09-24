@@ -40,18 +40,23 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.androidadvance:topsnackbar:1.1.1'
-    compile 'com.github.javiersantos:BottomDialogs:1.2.1'
+    implementation 'com.github.javiersantos:BottomDialogs:1.2.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.mobsandgeeks:android-saripaar:2.0.3'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.github.igalata:Bubble-Picker:v0.1.1'
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
-    implementation "com.squareup.retrofit2:retrofit:2.3.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-    implementation "com.squareup.picasso:picasso:2.4.0"
-    implementation  'com.github.thelester:Instagram-Helper:1.1.1'
-
+    implementation 'com.squareup.picasso:picasso:2.4.0'
+    implementation 'com.github.thelester:Instagram-Helper:1.1.1'
+    implementation 'com.github.guilhe:seekbar-ranged-view:1.0.2'
+    implementation 'com.github.Jay-Goo:RangeSeekBar:v2.0.4'
+    implementation 'br.com.simplepass:loading-button-android:1.14.0'
+    implementation 'com.github.joielechong:countrycodepicker:2.1.8'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.jrvansuita:PickImage:2.2.4'
 }

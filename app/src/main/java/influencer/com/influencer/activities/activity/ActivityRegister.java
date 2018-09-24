@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.orhanobut.hawk.Hawk;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ import butterknife.OnClick;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
 import influencer.com.influencer.activities.callback.IRegisterCallback;
+import influencer.com.influencer.activities.constants.Contants;
 import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 import retrofit2.Response;
 
@@ -47,11 +50,15 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
     @Email(message = "Please enter the valid email")
     EditText edEmail;
 
-    @BindView(R.id.register_password)
+    @BindView(R.id.register_password2)
     @NotEmpty
-    @Password(min = 6, scheme = Password.Scheme.ANY)
+    @Password(min = 8, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE,message = "A minimum 8 characters  contains a combination of uppercase and lowercase letter and number are required")
     EditText edPassword;
 
+    @BindView(R.id.register_passwordconfirm)
+    @NotEmpty
+    @ConfirmPassword()
+    EditText confirmPassword;
     ProgressDialog progressDialog;
 
 
@@ -87,7 +94,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
 
 
         RetrofitUtil retrofitUtil = new RetrofitUtil( ActivityRegister.this );
-        retrofitUtil.RegisterResponse (edEmail.getText ( ).toString ( ),edPassword.getText ( ).toString ( ));
+        retrofitUtil.RegisterResponse (edEmail.getText ( ).toString ( ),edPassword.getText ( ).toString ( ),confirmPassword.getText().toString());
     }
 
     @Override
@@ -102,24 +109,23 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
             } else {
                 Toast.makeText ( this, message, Toast.LENGTH_LONG ).show ( );
 
-
             }
         }
-
-
     }
 
 
     @OnClick(R.id.login_move)
     public void openLoginActivity() {
         finish ( );
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
     @OnClick(R.id.loginbtn)
     public void openMainAcitivity() {
-
-        validator.validate ( );
+        validator.validate();
     }
+
+
 
 
     @Override
@@ -127,9 +133,12 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         if(registerAPIResponse.body ( ) != null) {
             if(registerAPIResponse.body ( ).getSuccess ( )) {
 
-                startActivity(new Intent (getApplicationContext(),ActivitySelectIntrest.class));
-                finish();
-                progressDialog.hide();
+
+               String userid= registerAPIResponse.body().getInfluencerID();
+                Hawk.put(Contants.INFLUENCERID,userid);
+               Intent intent= new Intent(getApplicationContext(),ActivitySelectIntrest.class);
+               startActivity(intent);
+               finish();
 
             } else {
                 Log.d ( "message", registerAPIResponse.body ( ).getMessage ( ) );

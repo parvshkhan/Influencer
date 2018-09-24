@@ -29,7 +29,6 @@ public class SelectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         hidingTheStatusBar();
         setContentView(R.layout.activity_influencer_main);
         ButterKnife.bind(this);
@@ -44,6 +43,7 @@ public class SelectionActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+
     }
 
 
@@ -52,9 +52,21 @@ public class SelectionActivity extends AppCompatActivity {
     @OnClick(R.id.influencerbtn)
     public void openLoginActivity()
     {
-        finish();
+
         Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+    }
+
+    @OnClick(R.id.button2)
+    public void openbrandactivity()
+    {
+
+        Intent intent = new Intent(getApplicationContext(), BrandLogin.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
 
     }
 

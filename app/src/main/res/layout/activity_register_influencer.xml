@@ -68,7 +68,30 @@
             app:layout_constraintVertical_bias="0.33999997" />
 
         <EditText
-            android:id="@+id/register_password"
+            android:id="@+id/register_passwordconfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@drawable/loginedittextbg"
+            android:drawableLeft="@drawable/ic_password"
+            android:drawablePadding="@dimen/_10sdp"
+            android:ems="10"
+            android:hint="CONFIRM PASSWORD"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_password2" />
+
+        <EditText
+            android:id="@+id/register_password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -95,15 +118,15 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:background="@drawable/loginbtnright"
             android:drawableRight="@drawable/ic_righterrow"
             android:text="Register"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/login_password"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/login_password"
-            app:layout_constraintTop_toBottomOf="@+id/register_password" />
+            app:layout_constraintTop_toBottomOf="@+id/register_passwordconfirm" />
 
         <TextView
             android:id="@+id/textView5"

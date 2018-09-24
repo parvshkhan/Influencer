@@ -183,10 +183,11 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
         Intent intent = new Intent(getApplicationContext(), ActivityRegister.class);
         startActivity(intent);
-
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
 
-    //forgot password validations with button click--------------------------------------------------------------------------
+
+    //--------------------------forgot password validations with button click---------------------------------------------------------------
 
 
 
@@ -258,7 +259,7 @@ public class ActivityLogin extends AppCompatActivity implements Validator.Valida
 
 
 
-    // ------------------Facebook Integration with button click-----------------------------------------------------------------------------------------------
+    // ------------------Facebook Integration with button click-------------------------------------------------------------------------
     @OnClick(R.id.regfbbtn)
     public void facebooklogin()
     {

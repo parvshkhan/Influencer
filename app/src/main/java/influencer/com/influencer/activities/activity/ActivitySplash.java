@@ -60,6 +60,7 @@ public class ActivitySplash extends AppCompatActivity {
 
                         Intent intent=new Intent(ActivitySplash.this,SelectionActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
                         finish();
 
 

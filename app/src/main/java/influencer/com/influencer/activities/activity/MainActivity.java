@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.adapters.ViewPagerAdapter;
 import influencer.com.influencer.activities.fragments.FragmentFive;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SearchView searchView;
 
-    Button influencerbtn;
+    Button influencerbtn,brand;
 
     BottomNavigationView bottomNavigationView;
 
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         influencerbtn = findViewById(R.id.influencerbtn);
+
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
@@ -145,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
     }
+
+
 
 
 }
