@@ -1,9 +1,6 @@
 package influencer.com.influencer.activities.callback;
 
-import android.media.FaceDetector;
-
-import influencer.com.influencer.activities.apiResponses.registerAPI.FacebookApi;
-import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.FacebookApi;
 import retrofit2.Response;
 
 /**

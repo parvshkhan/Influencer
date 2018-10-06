@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="#eff7fb"
         android:paddingBottom="@dimen/_5sdp"
-        tools:context="influencer.com.influencer.activities.activity.BrandLogin">
+        tools:context="influencer.com.influencer.activities.activity.brand.BrandLogin">
 
         <ImageView
             android:id="@+id/imageView4"

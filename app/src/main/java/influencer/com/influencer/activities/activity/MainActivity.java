@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     InputMethodManager imm;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 
@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -135,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-
 
 
         adapter.addFragment(new FragmentListing ());

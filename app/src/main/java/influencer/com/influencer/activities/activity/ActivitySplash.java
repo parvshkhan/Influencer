@@ -1,9 +1,13 @@
 package influencer.com.influencer.activities.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,7 +17,7 @@ import android.webkit.CookieSyncManager;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
-import com.steelkiwi.instagramhelper.InstagramHelper;
+
 
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.constants.Contants;
@@ -23,13 +27,13 @@ import influencer.com.influencer.activities.constants.Contants;
 public class ActivitySplash extends AppCompatActivity {
 
     LoginManager loginManager;
+    PackageInfo info;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hidingTheStatusBar();
         setContentView(R.layout.activity_splash);
-
 
 
 

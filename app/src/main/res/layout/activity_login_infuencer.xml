@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="#eff7fb"
 android:paddingBottom="@dimen/_5sdp"
-        tools:context="influencer.com.influencer.activities.activity.ActivityLogin">
+        tools:context="influencer.com.influencer.activities.activity.influencer.ActivityLogin">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -43,6 +43,7 @@ android:paddingBottom="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <EditText
+            android:imeOptions="actionDone"
             android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

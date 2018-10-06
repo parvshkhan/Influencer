@@ -30,33 +30,30 @@
         <activity
             android:name=".activities.activity.ActivitySplash"
             android:windowSoftInputMode="stateHidden">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activities.activity.MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-
             android:name=".activities.activity.SelectionActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.activity.ActivityLogin"
+            android:name=".activities.activity.influencer.ActivityLogin"
+            android:exported="true"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".activities.activity.ActivityRegister"
+            android:name=".activities.activity.influencer.ActivityRegister"
             android:windowSoftInputMode="stateHidden" />
-        <activity  android:name=".activities.activity.ActivitySelectIntrest" >
-
-        </activity>
-        <activity android:name=".activities.activity.ActivityPost" />
-
-
+        <activity
+            android:name=".activities.activity.influencer.ActivitySelectIntrest"
+            android:exported="true" />
+        <activity android:name=".activities.activity.influencer.ActivityPost" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -81,18 +78,23 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.activity.BrandLogin"/>
-        <activity android:name=".activities.activity.ActivityAbout"
-            android:windowSoftInputMode="adjustPan">
-
+        <activity
+            android:name=".activities.activity.brand.BrandLogin"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name=".activities.activity.influencer.ActivityAbout"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
 
         </activity>
-        <activity android:name=".activities.activity.ActivityBrandRegister" />
-        <activity android:name=".activities.activity.ActivityBrandUserInfo"
+        <activity android:name=".activities.activity.brand.ActivityBrandRegister" />
+        <activity
+            android:name=".activities.activity.brand.ActivityBrandUserInfo"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan">
 
         </activity>
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -104,6 +106,19 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/picker_provider_paths" />
         </provider>
+
+        <activity
+            android:name=".activities.activity.ActivityPurchase"
+            android:exported="true" />
+        <activity
+            android:name=".activities.activity.influencer.InfluencerPlans"
+            android:exported="true">
+
+        </activity>
+        <activity android:name=".activities.activity.WaitingPage"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

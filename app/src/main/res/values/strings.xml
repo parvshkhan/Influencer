@@ -27,6 +27,9 @@
     <string name="fb_login_protocol_scheme">fb443008666195754</string>
 
 
+    <string name="watingtext"><font color="#15346c">Keep an eye on your mailbox, we\'ll review your account and come back to you within </font><font color="#fb6489">48 hours</font></string>
+
+
     <string-array name="Selectlanguage">
         <item><font color="#afaeae">Select Language</font></item>
         <item>English</item>

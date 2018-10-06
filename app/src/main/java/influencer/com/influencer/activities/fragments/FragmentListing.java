@@ -65,8 +65,6 @@ public class FragmentListing extends Fragment {
         rchomeList.setItemAnimator(new DefaultItemAnimator());
         rchomeList.setAdapter(recadapter);
 
-
-
         return view;
 
     }
@@ -74,7 +72,8 @@ public class FragmentListing extends Fragment {
     @OnClick(R.id.searchView)
     public void searchclick()
     {
-
-
+        search.setIconified(false);
     }
+
+
 }

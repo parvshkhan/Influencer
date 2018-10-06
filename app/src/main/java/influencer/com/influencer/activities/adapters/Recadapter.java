@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import influencer.com.influencer.R;
-import influencer.com.influencer.activities.activity.ActivityPost;
+import influencer.com.influencer.activities.activity.influencer.ActivityPost;
 import influencer.com.influencer.activities.model.Recpojo;
 
 public class Recadapter extends RecyclerView.Adapter<Recadapter.ListViewHolder> {

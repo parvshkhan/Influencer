@@ -12,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.activity.influencer.ActivityLogin;
+import influencer.com.influencer.activities.activity.brand.BrandLogin;
 
 /**
  * Created by android on 3/8/18.

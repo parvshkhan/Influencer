@@ -1,7 +1,6 @@
 package influencer.com.influencer.activities.callback;
 
-import influencer.com.influencer.activities.apiResponses.registerAPI.ForgetPwdAPI;
-import influencer.com.influencer.activities.apiResponses.registerAPI.LoginAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.LoginAPI;
 import retrofit2.Response;
 
 /**

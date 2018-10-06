@@ -1,6 +1,6 @@
 package influencer.com.influencer.activities.callback;
 
-import influencer.com.influencer.activities.apiResponses.registerAPI.RegisterAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.RegisterAPI;
 import retrofit2.Response;
 
 
