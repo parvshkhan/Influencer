@@ -1,6 +1,5 @@
 package influencer.com.influencer.activities.activity;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -15,14 +14,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.adapters.ViewPagerAdapter;
 import influencer.com.influencer.activities.fragments.FragmentFive;
-import influencer.com.influencer.activities.fragments.FragmentProfile;
-import influencer.com.influencer.activities.fragments.FragmentListing;
 import influencer.com.influencer.activities.fragments.FragmentThree;
-import influencer.com.influencer.activities.fragments.FragmentCampaigns;
 import influencer.com.influencer.activities.helper.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -138,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 
-        adapter.addFragment(new FragmentListing ());
-        adapter.addFragment(new FragmentCampaigns ());
+//        adapter.addFragment(new FragmentListing ());
+//        adapter.addFragment(new FragmentCampaigns ());
         adapter.addFragment(new FragmentThree());
-        adapter.addFragment(new FragmentProfile ());
+//        adapter.addFragment(new RequestedCampaigns ());
         adapter.addFragment(new FragmentFive());
         viewPager.setAdapter(adapter);
 

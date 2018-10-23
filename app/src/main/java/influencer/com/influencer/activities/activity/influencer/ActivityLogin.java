@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.ProfileTracker;
+import com.google.android.gms.maps.model.Dash;
 import com.google.gson.Gson;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -36,6 +39,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.activity.ActivityPurchase;
 import influencer.com.influencer.activities.activity.FbLoginBaseActivity;
 import influencer.com.influencer.activities.activity.MainActivity;
 import influencer.com.influencer.activities.activity.WaitingPage;
@@ -239,6 +243,9 @@ public class ActivityLogin extends FbLoginBaseActivity implements Validator.Vali
     //                                                     API RESPONSES
 //==========================================================================================================================================
 
+
+
+    //                                               FORGET PASSWORD
     @Override
     public void getRegisterResponseSuccess(Response<ForgetPwdAPI> forgetPwdAPIResponse) {
 
@@ -265,56 +272,51 @@ public class ActivityLogin extends FbLoginBaseActivity implements Validator.Vali
 
     }
 
+    //                                          LOGIN
+
     @Override
     public void getLoginResponseSuccess(Response<LoginAPI> loginAPIResponse) {
+        Hawk.put(Contants.INFLUENCERID,loginAPIResponse.body().getInfluencerID());
+        Hawk.put(Contants.PROFILENAME,loginAPIResponse.body().getName());
+        Hawk.put(Contants.PROGILEIMG,loginAPIResponse.body().getPicture());
 
         if (loginAPIResponse.body() != null) {
             if (loginAPIResponse.body().getStatus().equals("1")) {
-
-                startActivity(new Intent(getApplicationContext(), ActivitySelectIntrest.class));
-                finish();
-                overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
                 dialog.dismiss();
-
+                startActivity(new Intent(getApplicationContext(),ActivitySelectIntrest.class));
+                overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
+                finish();
             }
             else if (loginAPIResponse.body().getStatus().equals("2"))
             {
-                Hawk.put(Contants.INFLUENCERID,loginAPIResponse.body().getInfluencerID());
+
                 RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityLogin.this);
                 retrofitUtil.dashboardresponse(String.valueOf(Hawk.get(Contants.INFLUENCERID)));
-                overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
-            }
 
+            }
             else if (loginAPIResponse.body().getStatus().equals("3"))
             {
                 dialog.dismiss();
                 startActivity(new Intent(getApplicationContext(),WaitingPage.class));
                 overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
                 finish();
-
             }
 
             else if (loginAPIResponse.body().getStatus().equals("4"))
             {
                 dialog.dismiss();
-                startActivity(new Intent(getApplicationContext(),WaitingPage.class));
+                startActivity(new Intent(getApplicationContext(),InfluencerPlans.class));
                 overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
                 finish();
-
             }
-
-            else {
-                new CustomToast(getApplicationContext(), loginAPIResponse.body().getMessage());
-
+            else
+            {
                 dialog.dismiss();
-
-
+                Toast.makeText(getApplicationContext(),loginAPIResponse.body().getMessage(),Toast.LENGTH_SHORT).show();
             }
-
         }
+}
 
-
-    }
 
     @Override
     public void getRegisterFailure(Throwable registerAPIResponse) {
@@ -377,56 +379,7 @@ public class ActivityLogin extends FbLoginBaseActivity implements Validator.Vali
     @OnClick(R.id.reg_insta_btn)
     public void instaloginbtnclick() {
 
-        View view = LayoutInflater.from(ActivityLogin.this).inflate(R.layout.activity_forget_password, null);
 
-         AlertDialog.Builder dialogshow=new AlertDialog.Builder(ActivityLogin.this);
-        dialogshow.setView(view);
-
-        alertDialog= dialogshow.create();
-        final EditText etemail = view.findViewById(R.id.forgotemail);
-        final Button login = view.findViewById(R.id.btnforgotpwd);
-        etemail.setHint("User Name");
-        login.setText("Login with Instagram");
-
-        view.findViewById(R.id.forgotcencelbtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                alertDialog.dismiss();
-
-            }
-        });
-
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email=etemail.getText().toString();
-
-                if (email.equals(""))
-                {
-                    etemail.setError("Can't Empty");
-                }
-                else
-                {
-                    dialog = new Dialog(ActivityLogin.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(R.layout.custom_dialog_progress);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    String url = "https://apinsta.herokuapp.com/u/" + email;
-
-                    RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityLogin.this);
-                    retrofitUtil.instagramintegration(url);
-                }
-            }
-        });
-
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        alertDialog.show();
 
 
     }
@@ -436,67 +389,56 @@ public class ActivityLogin extends FbLoginBaseActivity implements Validator.Vali
     //====================================================== DASHBOARD API RESPONSE =========================================================
     @Override
     public void getresponse(Object response) {
-
-        if (response instanceof String) {
-
-            JSONObject jsonObject= null;
-            if (response.equals("{}"))
-            {
-                dialog.dismiss();
-               Toast.makeText(ActivityLogin.this,"Wrong User Name",Toast.LENGTH_SHORT).show();
-
-            }
-            else
-            {
-                try {
-                    jsonObject = new JSONObject((String) response);
-                    String name=jsonObject.optJSONObject("graphql").optJSONObject("user").optString("full_name");
-                    String instapic=jsonObject.optJSONObject("graphql").optJSONObject("user").optString("profile_pic_url_hd");
-                    String username=jsonObject.optJSONObject("graphql").optJSONObject("user").optString("username");
-                    Toast.makeText(ActivityLogin.this,jsonObject.optJSONObject("graphql").optJSONObject("user").optString("full_name"),Toast.LENGTH_SHORT).show();
-                    alertDialog.dismiss();
-                    dialog.dismiss();
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-
-        }
         if (response instanceof DashBoardApi) {
 
-            if (((DashBoardApi) response).getStatus().equals(3)) {
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), WaitingPage.class);
-                startActivity(intent);
-                finish();
+            if(!((DashBoardApi) response).getSuccess())
+            {
+                if (((DashBoardApi) response).getStatus().equals(3)) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), WaitingPage.class);
+                    startActivity(intent);
+                    finish();
 
-            } else if (((DashBoardApi) response).getStatus().equals(2)) {
+                } else if (((DashBoardApi) response).getStatus().equals(2)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
 
-            } else if (((DashBoardApi) response).getStatus().equals(4)) {
+                } else if (((DashBoardApi) response).getStatus().equals(4)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), InfluencerPlans.class);
-                startActivity(intent);
-                finish();
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), InfluencerPlans.class);
+                    startActivity(intent);
+                    finish();
 
-            }else if (((DashBoardApi) response).getStatus().equals(1)) {
+                }else if (((DashBoardApi) response).getStatus().equals(1)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), ActivitySelectIntrest.class);
-                startActivity(intent);
-                finish();
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), ActivitySelectIntrest.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
-            else
-                Toast.makeText(getApplicationContext(), ((DashBoardApi) response).getMessage(), Toast.LENGTH_LONG).show();
+            if(((DashBoardApi) response).getSuccess())
+            {
+                dialog.dismiss();
+                Hawk.put("tname",((DashBoardApi) response).getUserDetail().getName());
+                Hawk.put("tdob",((DashBoardApi) response).getUserDetail().getDob());
+                Hawk.put("tlanguage",((DashBoardApi) response).getUserDetail().getLanguage());
+                Hawk.put("tratio",((DashBoardApi) response).getUserDetail().getGenderratio());
+                Hawk.put("tagefrom",((DashBoardApi) response).getUserDetail().getAgeFrom());
+                Hawk.put("tageto",((DashBoardApi) response).getUserDetail().getAgeTo());
+                Hawk.put("tinterest",((DashBoardApi) response).getUserDetail().getInterest());
+                Hawk.put("aboutme",((DashBoardApi) response).getUserDetail().getAboutme());
+                Hawk.put("gndr",((DashBoardApi) response).getUserDetail().getGender());
+                startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            }
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),((DashBoardApi) response).getMessage(),Toast.LENGTH_SHORT).show();
         }
 
 

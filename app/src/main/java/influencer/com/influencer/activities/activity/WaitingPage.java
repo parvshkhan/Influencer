@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,11 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import influencer.com.influencer.R;
 import influencer.com.influencer.activities.activity.influencer.ActivityAbout;
+import influencer.com.influencer.activities.activity.influencer.ActivityLogin;
 import influencer.com.influencer.activities.activity.influencer.InfluencerPlans;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerDashboardAPI.DashBoardApi;
 import influencer.com.influencer.activities.callback.ICallback;
@@ -35,6 +38,9 @@ public class WaitingPage extends AppCompatActivity implements ICallback {
     @BindView(R.id.textView81)
     TextView profilename;
 
+    @BindView(R.id.imageView42)
+    ImageView logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +51,14 @@ public class WaitingPage extends AppCompatActivity implements ICallback {
     }
 
     private void setdata() {
-        Picasso.with(WaitingPage.this).load(Hawk.get(Contants.INSTAIMG,"")).error(R.drawable.user).into(profileimg);
-
-
-
+       if (Hawk.get(Contants.INSTAIMG)!=null)
+       {
+           Picasso.with(WaitingPage.this).load(Hawk.get(Contants.INSTAIMG,"")).error(R.drawable.user).into(profileimg);
+       }
+       if (Hawk.get(Contants.PROGILEIMG)!=null)
+       {
+           Picasso.with(WaitingPage.this).load(Hawk.get(Contants.PROGILEIMG,"")).error(R.drawable.user).into(profileimg);
+       }
 
     }
 
@@ -107,5 +117,13 @@ public class WaitingPage extends AppCompatActivity implements ICallback {
     @Override
     public void getfailerresponse(Throwable throwable) {
 
+    }
+
+    @OnClick(R.id.imageView42)
+    public void logoutbtnclick()
+    {
+        Hawk.delete(Contants.INFLUENCERID);
+        startActivity(new Intent(WaitingPage.this,ActivityLogin.class));
+        finish();
     }
 }

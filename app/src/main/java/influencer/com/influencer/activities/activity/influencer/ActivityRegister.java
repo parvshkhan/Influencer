@@ -73,9 +73,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         validator.setValidationListener ( this );
 
 
-//        List<String> strings = new LinkedList <> ();
-//
-//        strings.remove ( 0);
+
     }
 
 
@@ -109,7 +107,6 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
                 ((EditText) view).setError ( message );
             } else {
                 Toast.makeText ( this, message, Toast.LENGTH_LONG ).show ( );
-
             }
         }
     }
@@ -120,7 +117,6 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
         finish ( );
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
     }
-
 
     @OnClick(R.id.loginbtn)
     public void openMainAcitivity() {
@@ -136,7 +132,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
             if(registerAPIResponse.body ( ).getSuccess ( )) {
 
                String userid= registerAPIResponse.body().getInfluencerID();
-                Hawk.put(Contants.INFLUENCERID,userid);
+                Hawk.put("tempid",userid);
                Intent intent= new Intent(getApplicationContext(),ActivitySelectIntrest.class);
                startActivity(intent);
                 overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
@@ -149,10 +145,7 @@ public class ActivityRegister extends AppCompatActivity implements Validator.Val
                 Toast.makeText(getApplicationContext(),registerAPIResponse.body().getMessage(),Toast.LENGTH_LONG).show();
                 progressDialog.hide();
                 progressDialog.cancel();
-
-
             }
-
         }
     }
 

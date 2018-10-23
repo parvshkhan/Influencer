@@ -15,6 +15,7 @@ public class PostPagerAdapter extends FragmentStatePagerAdapter {
         super(manager);
     }
 
+
     @Override
     public Fragment getItem(int position) {
         return mFragmentList.get(position);

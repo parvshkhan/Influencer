@@ -7,6 +7,8 @@ public class Contants {
     public static final String USER_LASTNAME= "last_name";
     public static final String USER_PROFILELINK= "link";
     public static final String FIMG= "path";
+    public static final String PROGILEIMG= "progileimg";
+    public static final String PROFILENAME= "profilename";
     public static final String INFLUENCERID= "influencerid";
 
 

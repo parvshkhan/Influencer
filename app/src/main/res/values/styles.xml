@@ -6,7 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="autoCompleteTextViewStyle">@style/cursorColor</item>
     </style>
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
@@ -19,6 +20,10 @@
 
     <style name="cursorColor" parent="Widget.AppCompat.AutoCompleteTextView">
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/blue</item>
     </style>
 
 </resources>

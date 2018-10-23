@@ -6,16 +6,25 @@ import com.google.gson.Gson;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.ChangePwdApi;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.UpdateProfileApi;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.invitedCampaign.InvitedCampaignAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.previousCampaign.PreviousCampaignAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.requestedcampaign.RequestedAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandFacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandForgetPwd;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandSetUp;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.FacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.LoginAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.PlanApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.RegisterAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.UserProfileAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandLoginApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandRegisterApi;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.activeCampaign.ActiveCampaign;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.searchCampaign.ApplyCampaignApi;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.campaign.searchCampaign.CampaignAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerDashboardAPI.DashBoardApi;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -106,7 +115,7 @@ public class RestClient {
         @FormUrlEncoded
         @POST("InfluencerAPI/Login")
         Call <LoginAPI> loginAPI(@Field("Email") String Email,
-                                       @Field("Password") String Password
+                                 @Field("Password") String Password
         );
 
 
@@ -163,8 +172,69 @@ public class RestClient {
         Call <DashBoardApi> dashboardapi(@Field("userid") String id);
 
 
+        @FormUrlEncoded
+        @POST("InfluencerAPI/PlanPay")
+        Call <PlanApi> planpay(@Field("plan") String plan,
+                               @Field("userid") String userid
+
+        );
 
 
+//=========================================== CAMPAIGN API ================================================
+        @FormUrlEncoded
+        @POST("InfluencerAPI/CampaignList")
+        Call <CampaignAPI> campaignlist(@Field("userid") String userid
+        );
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/MyActiveCampaign")
+        Call <ActiveCampaign> activecampaign(@Field("userid") String userid
+        );
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/RequestedCampaign")
+        Call <RequestedAPI> requestedcampain(@Field("userid") String userid
+        );
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/InvitedCampaign")
+        Call <InvitedCampaignAPI> invitedcampaign(@Field("userid") String userid
+        );
+
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/MyPreviousCampaign")
+        Call <PreviousCampaignAPI>previousCampaign(@Field("userid") String userid
+        );
+
+
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/ChangePassword")
+        Call <ChangePwdApi> changepwd(@Field("userid") String id,
+                                      @Field("OldPassword") String oldpwd,
+                                      @Field("NewPassword") String newpwd
+        );
+
+        @FormUrlEncoded
+        @POST("InfluencerAPI/InfluencerCampaignReq")
+        Call <ApplyCampaignApi> applycampaign(@Field("userid") String id,
+                                          @Field("campid") String imgid,
+                                          @Field("aboutyou") String about
+        );
+
+        @Multipart
+        @POST("InfluencerAPI/DetailSave1")
+        Call <UpdateProfileApi> updateprofile(@Part("userid") String  id,
+                                              @Part("name") String  name,
+                                              @Part MultipartBody.Part image,  // image file
+                                              @Part("gender") String  gender,
+                                              @Part("language") String language,
+                                              @Part("dob") String  dob,
+                                              @Part("interest") String interest,
+                                              @Part("genderratio") String genderratio,
+                                              @Part("ageratio") String ageratio,
+                                              @Part("about") String description);
 
         //================================================================================================================================
         //                                                            BRAND
@@ -185,7 +255,7 @@ public class RestClient {
         @FormUrlEncoded
         @POST("BrandApi/Login")
         Call <BrandLoginApi> brandloginapi(@Field("Email") String Email,
-                                      @Field("Password") String Password
+                                           @Field("Password") String Password
         );
 
         //================================================ BRAND FORGET PASSWORD ==========================================================
@@ -201,10 +271,10 @@ public class RestClient {
         @FormUrlEncoded
         @POST("BrandApi/FacebookLogin")
         Call <BrandFacebookApi> brandfbapi(@Field("email") String Email,
-                                            @Field("id") String id,
-                                            @Field("firstname") String firstname,
-                                            @Field("lastname") String lastname,
-                                            @Field("link") String link
+                                           @Field("id") String id,
+                                           @Field("firstname") String firstname,
+                                           @Field("lastname") String lastname,
+                                           @Field("link") String link
 
         );
 

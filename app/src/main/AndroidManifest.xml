@@ -85,16 +85,12 @@
         <activity
             android:name=".activities.activity.influencer.ActivityAbout"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".activities.activity.brand.ActivityBrandRegister" />
         <activity
             android:name=".activities.activity.brand.ActivityBrandUserInfo"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -112,13 +108,19 @@
             android:exported="true" />
         <activity
             android:name=".activities.activity.influencer.InfluencerPlans"
-            android:exported="true">
-
-        </activity>
-        <activity android:name=".activities.activity.WaitingPage"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".activities.activity.WaitingPage"
+            android:exported="true" />
+        <activity
+            android:name=".activities.activity.influencer.Dashboard"
+            android:exported="true" />
+        <activity android:name=".activities.activity.influencer.UserProfile" />
+        <activity
+            android:name=".activities.activity.influencer.EditProfile"
+            android:exported="true" />
+        <activity android:name=".activities.activity.influencer.ChangePassword"
+            android:exported="true"/>
     </application>
 
 </manifest>

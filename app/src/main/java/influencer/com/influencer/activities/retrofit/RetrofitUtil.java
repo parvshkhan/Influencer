@@ -7,6 +7,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import influencer.com.influencer.activities.activity.ActivitySplash;
 import influencer.com.influencer.activities.activity.WaitingPage;
 import influencer.com.influencer.activities.activity.brand.ActivityBrandUserInfo;
 import influencer.com.influencer.activities.activity.influencer.ActivityAbout;
@@ -14,12 +15,15 @@ import influencer.com.influencer.activities.activity.brand.ActivityBrandRegister
 import influencer.com.influencer.activities.activity.influencer.ActivityLogin;
 import influencer.com.influencer.activities.activity.influencer.ActivityRegister;
 import influencer.com.influencer.activities.activity.brand.BrandLogin;
+import influencer.com.influencer.activities.activity.influencer.EditProfile;
+import influencer.com.influencer.activities.activity.influencer.InfluencerPlans;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandFacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandForgetPwd;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandSetUp;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.FacebookApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.ForgetPwdAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.LoginAPI;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.PlanApi;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.RegisterAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.influencerAPI.UserProfileAPI;
 import influencer.com.influencer.activities.apiResponses.registerAPI.brand.BrandLoginApi;
@@ -64,8 +68,13 @@ public class RetrofitUtil {
             iCallback = (ICallback) ctx;
         } else if (ctx instanceof ActivityBrandUserInfo) {
             iCallback = (ICallback) ctx;
-        }
-        else if (ctx instanceof WaitingPage) {
+        } else if (ctx instanceof WaitingPage) {
+            iCallback = (ICallback) ctx;
+        } else if (ctx instanceof InfluencerPlans) {
+            iCallback = (ICallback) ctx;
+        } else if (ctx instanceof ActivitySplash) {
+            iCallback = (ICallback) ctx;
+        }else if (ctx instanceof EditProfile) {
             iCallback = (ICallback) ctx;
         }
         else {
@@ -215,6 +224,39 @@ public class RetrofitUtil {
 
             }
         });
+    }
+
+
+    public void updateprofileresponse(RequestBody userid, RequestBody name, MultipartBody.Part file,
+                                      RequestBody gender, RequestBody language, RequestBody dob , RequestBody interest,
+                                      RequestBody genderratio, RequestBody ageratio,RequestBody description)
+
+    {
+
+    }
+
+    //======================================== PLAN API ==================================================
+
+    public void influencerplan(String plan, final String id)
+    {
+
+        restClient.planpay(plan,id).enqueue(new Callback<PlanApi>() {
+            @Override
+            public void onResponse(Call<PlanApi> call, Response<PlanApi> response) {
+
+                iCallback.getresponse(response.body());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<PlanApi> call, Throwable t) {
+
+                iCallback.getfailerresponse(t);
+
+            }
+        });
+
     }
 
 

@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -24,17 +22,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.Dash;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.orhanobut.hawk.Hawk;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,11 +44,11 @@ import influencer.com.influencer.activities.apiResponses.registerAPI.influencerD
 import influencer.com.influencer.activities.callback.ICallback;
 import influencer.com.influencer.activities.constants.Contants;
 import influencer.com.influencer.activities.customViewPagger.CustomViewPager;
-import influencer.com.influencer.activities.fragments.influencer.FragmentAbout;
-import influencer.com.influencer.activities.fragments.influencer.FragmentCharacterstics;
-import influencer.com.influencer.activities.fragments.influencer.FragmentContactShipijng;
-import influencer.com.influencer.activities.fragments.influencer.FragmentSocialAccount;
-import influencer.com.influencer.activities.fragments.influencer.FragmentTarget;
+import influencer.com.influencer.activities.fragments.influencer.register.FragmentAbout;
+import influencer.com.influencer.activities.fragments.influencer.register.FragmentCharacterstics;
+import influencer.com.influencer.activities.fragments.influencer.register.FragmentContactShipijng;
+import influencer.com.influencer.activities.fragments.influencer.register.FragmentSocialAccount;
+import influencer.com.influencer.activities.fragments.influencer.register.FragmentTarget;
 import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 import influencer.com.influencer.activities.viewpaggeranimation.DepthTransformation;
 import okhttp3.MediaType;
@@ -248,8 +243,9 @@ public class ActivityAbout extends AppCompatActivity implements Validator.Valida
 
 
         File file = new File(Hawk.get(Contants.IMGLINK, ""));
-
         MultipartBody.Part fbodyImage = prepareFilePart(this, file, "file");
+        Hawk.put(Contants.INFLUENCERID,Hawk.get("tempid"));
+
 
         RequestBody fBodyinfId = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.INFLUENCERID, ""));
         RequestBody name = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.NAME, ""));
@@ -274,11 +270,11 @@ public class ActivityAbout extends AppCompatActivity implements Validator.Valida
         RequestBody shoes = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.SHOES, ""));
         RequestBody underwear = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.UNDERWEAR, ""));
         RequestBody extrainfo = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.EXTRAINFO, ""));
-        RequestBody instalink = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.ISTALINK,""));
-        RequestBody instaimg = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.INSTAIMG,""));
+        RequestBody instalink = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody instaimg = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody fbimg = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.FIMG, ""));
         RequestBody fbname = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.USER_FIRSTNAME, ""));
-        RequestBody instaname = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.INSTANAME,""));
+        RequestBody instaname = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody fblink = RequestBody.create(MediaType.parse("text/plain"), Hawk.get(Contants.USER_PROFILELINK, ""));
 
         retrofitUtil.userdetails(fBodyinfId, name, fbodyImage, gender, language, dob, describe, interest, ratio, range, fname, lname, country, address, city, postcode, height, jeans, width, pants, shirt, shoes, underwear, extrainfo, instalink, instaimg, fbimg, fbname, instaname, fblink);
@@ -375,30 +371,45 @@ public class ActivityAbout extends AppCompatActivity implements Validator.Valida
 
         } else if (response instanceof DashBoardApi) {
 
-            if (((DashBoardApi) response).getStatus().equals(3)) {
+            if (!((DashBoardApi) response).getSuccess())
+            {
+                if (((DashBoardApi) response).getStatus().equals(3)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), WaitingPage.class);
-                startActivity(intent);
-                finish();
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), WaitingPage.class);
+                    startActivity(intent);
+                    finish();
 
-            } else if (((DashBoardApi) response).getStatus().equals(2)) {
+                } else if (((DashBoardApi) response).getStatus().equals(2)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+                    dialog.dismiss();
+                    RetrofitUtil retrofitUtil = new RetrofitUtil(ActivityAbout.this);
+                    retrofitUtil.dashboardresponse(String.valueOf(Hawk.get(Contants.INFLUENCERID, "")));
 
-            } else if (((DashBoardApi) response).getStatus().equals(4)) {
 
-                dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), InfluencerPlans.class);
-                startActivity(intent);
-                finish();
 
-            } else
+                } else if (((DashBoardApi) response).getStatus().equals(4)) {
+
+                    dialog.dismiss();
+                    Intent intent = new Intent(getApplicationContext(), InfluencerPlans.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+            if (((DashBoardApi) response).getSuccess())
+            {
+
+
+                startActivity(new Intent(getApplicationContext(),Dashboard.class));
+            }
+           else
                 Toast.makeText(getApplicationContext(), ((DashBoardApi) response).getMessage(), Toast.LENGTH_LONG).show();
         }
+
+
+
+
 
         else if (response instanceof String) {
 

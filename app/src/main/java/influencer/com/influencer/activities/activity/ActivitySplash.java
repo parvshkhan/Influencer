@@ -13,18 +13,26 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
+import com.vansuita.pickimage.bundle.PickSetup;
 
 
 import influencer.com.influencer.R;
+import influencer.com.influencer.activities.activity.influencer.ActivityLogin;
+import influencer.com.influencer.activities.activity.influencer.ActivitySelectIntrest;
+import influencer.com.influencer.activities.activity.influencer.Dashboard;
+import influencer.com.influencer.activities.activity.influencer.InfluencerPlans;
+import influencer.com.influencer.activities.apiResponses.registerAPI.influencerDashboardAPI.DashBoardApi;
+import influencer.com.influencer.activities.callback.ICallback;
 import influencer.com.influencer.activities.constants.Contants;
+import influencer.com.influencer.activities.retrofit.RetrofitUtil;
 
 
-
-public class ActivitySplash extends AppCompatActivity {
+public class ActivitySplash extends AppCompatActivity implements ICallback {
 
     LoginManager loginManager;
     PackageInfo info;
@@ -44,29 +52,22 @@ public class ActivitySplash extends AppCompatActivity {
                 try {
                     Thread.sleep(3000);
 
-                    Log.i("LoginType", "isCustom-->>"+isCustomLogin());
-                    Log.i("LoginType", "isFbLogin-->>"+isFbLogin());
-                    Log.i("LoginType", "isInstaLogin-->>"+isInstaLogin());
-                    if(isCustomLogin() || isFbLogin() || isInstaLogin())
+                    if (Hawk.get(String.valueOf(Contants.INFLUENCERID))!=null)
                     {
-                        if(Hawk.get(Contants.USER_EMAIL,null)!=null)
-                        {
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-
-                            finish();
-                            return;
-                        }
-                        LoginManager.getInstance().logOut();
-                        Hawk.delete(Contants.USER_EMAIL);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                callapi(String .valueOf(Hawk.get(Contants.INFLUENCERID)));
+                            }
+                        });
 
                     }
-
-
-                        Intent intent=new Intent(ActivitySplash.this,SelectionActivity.class);
+                    else {
+                        Intent intent = new Intent(ActivitySplash.this, SelectionActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fadein, R.anim.slide_to_right);
                         finish();
-
+                    }
 
 
                 } catch (InterruptedException e) {
@@ -75,8 +76,19 @@ public class ActivitySplash extends AppCompatActivity {
                 }
                 super.run( );
             }
+
+
         };
         thread.start();
+
+
+    }
+
+    private void callapi(String  id) {
+
+        RetrofitUtil retrofitUtil=new RetrofitUtil(ActivitySplash.this);
+        retrofitUtil.dashboardresponse(id);
+
 
 
     }
@@ -87,6 +99,8 @@ public class ActivitySplash extends AppCompatActivity {
 
 
     }
+
+
 
 public boolean isFbLogin()
 {
@@ -104,4 +118,52 @@ boolean isInstaLogin()
 
    return false;
 }
+
+    @Override
+    public void getresponse(Object response) {
+        if (response==null)
+        {
+         finish();
+         Toast.makeText(ActivitySplash.this,"dsfsdf",Toast.LENGTH_SHORT).show();
+        }
+
+        if (response instanceof DashBoardApi) {
+
+           if(!((DashBoardApi) response).getSuccess())
+           {
+               if (((DashBoardApi) response).getStatus().equals(3)) {
+                   Intent intent = new Intent(getApplicationContext(), WaitingPage.class);
+                   startActivity(intent);
+                   finish();
+               } else if (((DashBoardApi) response).getStatus().equals(2)) {
+                   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                   startActivity(intent);
+                   finish();
+               } else if (((DashBoardApi) response).getStatus().equals(4)) {
+                   Intent intent = new Intent(getApplicationContext(), InfluencerPlans.class);
+                   startActivity(intent);
+                   finish();
+               }else if (((DashBoardApi) response).getStatus().equals(1)) {
+                   Intent intent = new Intent(getApplicationContext(), ActivitySelectIntrest.class);
+                   startActivity(intent);
+                   finish();
+               }
+           }
+           else if (((DashBoardApi) response).getSuccess()) {
+               Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+               startActivity(intent);
+               finish();
+           }
+
+            else
+                Toast.makeText(getApplicationContext(), ((DashBoardApi) response).getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+
+    }
+
+    @Override
+    public void getfailerresponse(Throwable throwable) {
+
+    }
 }
